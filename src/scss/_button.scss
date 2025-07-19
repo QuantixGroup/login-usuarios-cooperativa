@@ -1,0 +1,16 @@
+.button-login {
+  background-color: $bg-color-primary;  
+  font-family: $font-button;
+  color: $bg-color-secondary;
+  font-weight: 200;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+
+  &:hover {
+    background-image: linear-gradient(to top, #1B4965 30%, #3693CB 80%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    color: $text-color-secondary;
+    
+  }
+}
