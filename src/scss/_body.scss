@@ -1,36 +1,59 @@
-.body-background{
+.body-background {
     background-image: url('../src/img/fondoContruccion.avif');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+    @include media-breakpoint-down(sm) {
+        background-size: auto;
+    }
 }
 
-h1{
+h1 {
     font-family: $font-title;
     color: $text-color-secondary;
-    padding-bottom: 10px;
+    font-size: 3rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+
+    @include media-breakpoint-down(sm) {
+        font-size: 2rem;
+    }
 }
 
-h2{
+h2 {
     font-family: $font-subtitle;
     color: $text-color-primary;
+    font-size: 2rem;
 
+
+    @include media-breakpoint-down(sm) {
+        font-size: 1.8rem;
+    }
 }
 
-.card{
+.card {
     background-color: $bg-color-secondary;
-    border-radius: 10px;
+    border-radius: 1.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 1rem;
+    -webkit-border-radius: 1.5rem;
+    -moz-border-radius: 1.5rem;
+    -ms-border-radius: 1.5rem;
+    -o-border-radius: 1.5rem;
+
+    @include media-breakpoint-down(sm) {
+        padding: 0.5rem;
+        border-radius: 1rem;
+    }
 }
 
-.card-body, .label{
+.card-body,
+.label {
     font-family: $font-subtitle;
     color: $text-color-primary;
 }
 
-.input-group-text{
-cursor: pointer;
+.input-group-text {
+    cursor: pointer;
 }

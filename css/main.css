@@ -11855,8 +11855,13 @@ textarea.form-control-lg {
   }
 }
 .img-logo {
-  max-width: 200px;
+  max-width: 12rem;
   height: auto;
+}
+@media (max-width: 575.98px) {
+  .img-logo {
+    max-width: 10rem;
+  }
 }
 
 .body-background {
@@ -11866,27 +11871,54 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+@media (max-width: 575.98px) {
+  .body-background {
+    background-size: auto;
+  }
+}
 
 h1, .h1 {
   font-family: "Roboto", sans-serif;
   color: #f6f6f6;
-  padding-bottom: 10px;
+  font-size: 3rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+@media (max-width: 575.98px) {
+  h1, .h1 {
+    font-size: 2rem;
+  }
 }
 
 h2, .h2 {
   font-family: "Montserrat", sans-serif;
   color: #1b4965;
+  font-size: 2rem;
+}
+@media (max-width: 575.98px) {
+  h2, .h2 {
+    font-size: 1.8rem;
+  }
 }
 
 .card {
   background-color: #f6f6f6;
-  border-radius: 10px;
+  border-radius: 1.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 1rem;
+  -webkit-border-radius: 1.5rem;
+  -moz-border-radius: 1.5rem;
+  -ms-border-radius: 1.5rem;
+  -o-border-radius: 1.5rem;
+}
+@media (max-width: 575.98px) {
+  .card {
+    padding: 0.5rem;
+    border-radius: 1rem;
+  }
 }
 
-.card-body, .label {
+.card-body,
+.label {
   font-family: "Montserrat", sans-serif;
   color: #1b4965;
 }
@@ -11895,17 +11927,47 @@ h2, .h2 {
   cursor: pointer;
 }
 
-.button-login {
-  background-color: #1b4965;
+.btn-enviar,
+.btn-cerrar, .btn-login {
   font-family: "Roboto", sans-serif;
-  color: #f6f6f6;
   font-weight: 200;
+  color: #f6f6f6;
+  background-color: #1b4965;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.btn-login {
   font-size: 1.2rem;
   margin-top: 2rem;
 }
-.button-login:hover {
+.btn-login:hover {
   background-image: linear-gradient(to top, #1B4965 30%, #3693CB 80%);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
   color: #f6f6f6;
+  transform: translateY(-2px);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  -o-transform: translateY(-2px);
+}
+
+.btn-enviar,
+.btn-cerrar {
+  font-size: 1rem;
+}
+.btn-enviar:hover,
+.btn-cerrar:hover {
+  background-image: linear-gradient(to top, #1B4965 30%, #3693CB 80%);
+  color: #f6f6f6;
+  transform: translateY(-2px);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  -o-transform: translateY(-2px);
 }/*# sourceMappingURL=main.css.map */
