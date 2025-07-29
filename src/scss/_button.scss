@@ -1,0 +1,43 @@
+%btn-base {
+  font-family: $font-button;
+  font-weight: 200;
+  color: $bg-color-secondary;
+  background-color: $bg-color-primary;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+@mixin btn-hover-effect {
+  background-image: linear-gradient(to top, #1B4965 30%, #3693CB 80%);
+  color: $text-color-secondary;
+  transform: translateY(-2px);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  -o-transform: translateY(-2px);
+}
+
+.btn-login {
+  @extend %btn-base;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+
+  &:hover {
+    @include btn-hover-effect;
+  }
+}
+
+.btn-enviar,
+.btn-cerrar {
+  @extend %btn-base;
+  font-size: 1rem;
+
+  &:hover {
+    @include btn-hover-effect;
+  }
+}

@@ -1,11 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio de Sesión - COVIMT 17</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
-    
+
+<body class="body-background">
+
+    <div class="container d-flex flex-column justify-content-sm-center align-items-center vh-100 pt-5">
+        <header class="d-flex flex-column align-items-center">
+            <img src="src/img/logo_cooperativa.svg" alt="Logo de COVIMT 17" class="img-logo">
+            <h1 class="text-center mt-4">COVIMT 17</h1>
+        </header>
+        <main class="w-100 mt-5" style="max-width: 400px;">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Inicio de Sesión</h2>
+                    <form action="/login" method="POST">
+                        <div class="mb-3">
+                            <label for="documento" class="form-label">Documento (CI):</label>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" id="documento"
+                                placeholder="Ingrese su CI sin puntos ni guiones" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña:</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password"
+                                    placeholder="Ingrese su contraseña" required>
+                                <span class="input-group-text" id="togglePassword">
+                                    <i class="bi bi-eye-slash-fill"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-login w-100 mt-3">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Ingresar
+                        </button>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="recordar" name="recordar">
+                                <label class="form-check-label" for="recordar">Recordar</label>
+                            </div>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalRecuperar">
+                                ¿Olvidó su contraseña?
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal fade" id="modalRecuperar" tabindex="-1" aria-labelledby="modalRecuperarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalRecuperarLabel">Recuperar contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Por favor, coloque su correo electrónico para cambiar su contraseña.</p>
+                    <form id="form-recuperar">
+                        <div class="mb-3">
+                            <label for="email-recupero" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email-recupero"
+                                placeholder="ejemplo@correo.com" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" form="form-recuperar" class="btn btn-enviar">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="src/js/main.js"></script>
+
 </body>
+
 </html>
