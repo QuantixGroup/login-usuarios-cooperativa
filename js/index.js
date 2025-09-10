@@ -9,7 +9,10 @@ $(document).ready(function () {
     $.ajax({
         url: API_USUARIOS + "/perfil",
         type: "GET",
-        headers: { "Authorization": "Bearer " + token },
+        headers: {
+            "Accept": "application/json",
+            "Authorization": "Bearer " + token
+        },
         success: function (data) {
             $("#nombre").val(data.nombre);
             $("#apellido").val(data.apellido);
@@ -26,7 +29,11 @@ $(document).ready(function () {
         $.ajax({
             url: API_USUARIOS + "/perfil",
             type: "PUT",
-            headers: { "Authorization": "Bearer " + token },
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
             data: {
                 nombre: $("#nombre").val(),
                 apellido: $("#apellido").val(),
@@ -47,11 +54,15 @@ $(document).ready(function () {
         $.ajax({
             url: API_USUARIOS + "/perfil/contrasena",
             type: "PUT",
-            headers: { "Authorization": "Bearer " + token },
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
             data: {
-                actual: $("#actual").val(),
-                nueva: $("#nueva").val(),
-                confirmar: $("#confirmar").val()
+                contrasena_actual: $("#actual").val(),
+                contrasena_nueva: $("#nueva").val(),
+                contrasena_nueva_confirmation: $("#confirmar").val()
             },
             success: function () {
                 alert("Contraseña cambiada con éxito");
@@ -65,9 +76,13 @@ $(document).ready(function () {
     $("#formHoras").submit(function (e) {
         e.preventDefault();
         $.ajax({
-            url: "http://127.0.0.1:8001/api/horas", 
+            url: "http://127.0.0.1:8001/api/horas",
             type: "POST",
-            headers: { "Authorization": "Bearer " + token },
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
             data: {
                 fecha: $("#fecha").val(),
                 cantidad: $("#cantidad").val(),
@@ -87,7 +102,7 @@ $(document).ready(function () {
         e.preventDefault();
         let formData = new FormData(this);
         $.ajax({
-            url: "http://127.0.0.1:8001/api/comprobantes", 
+            url: "http://127.0.0.1:8001/api/comprobantes",
             type: "POST",
             headers: { "Authorization": "Bearer " + token },
             processData: false,
@@ -106,14 +121,14 @@ $(document).ready(function () {
         $.ajax({
             url: API_USUARIOS + "/cerrar-sesion",
             type: "POST",
-            headers: { "Authorization": "Bearer " + token },
-            success: function () {
-                sessionStorage.removeItem("tokenAcceso");
-                alert("Sesión cerrada");
-                window.location.href = "login.html";
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
             },
-            error: function () {
-                alert("Error al cerrar sesión");
+            complete: function () {
+                sessionStorage.removeItem("tokenAcceso");
+                window.location.href = "login.html";
             }
         });
     });

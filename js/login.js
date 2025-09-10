@@ -1,20 +1,22 @@
 $(document).ready(function () {
-  let tokenAcceso = null;
-
   $("#form-login").on("submit", function (evento) {
     evento.preventDefault();
 
-    const cedula = $("#cedula").val().trim();
-    const contrasena = $("#contrasena").val();
+    const cedula = $("#documento").val().trim();
+    const contrasena = $("#password").val();
 
     $.ajax({
       url: API_USUARIOS + "/iniciar-sesion",
       method: "POST",
+      headers: { "Accept": "application/json" },
       contentType: "application/json",
-      data: JSON.stringify({ cedula: cedula, password: contrasena }),
+      data: JSON.stringify({ cedula, contrasena }),
       success: function (datos) {
-        tokenAcceso = datos.access_token || datos.token || datos.accessToken;
-        cargarPerfil();
+        const token = datos.access_token;
+        if (!token) { mostrarMensajeError("No llegó access_token"); return; }
+
+        sessionStorage.setItem("tokenAcceso", token);
+        window.location.href = "index.html";  
         mostrarMensajeOk("Sesión iniciada");
       },
       error: function (xhr) {
