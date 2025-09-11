@@ -3,12 +3,73 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Panel de Usuario</title>
+    <title>Panel del Socio</title>
 </head>
 
 <body>
-    <h1 id="bienvenida">Cargando...</h1>
+    <h1>Bienvenido al Panel</h1>
+
+    <section>
+        <h2>Mi perfil</h2>
+        <form id="formPerfil">
+            <label>Nombre: <input type="text" id="nombre" name="nombre"></label><br>
+            <label>Apellido: <input type="text" id="apellido" name="apellido"></label><br>
+            <label>Teléfono: <input type="text" id="telefono" name="telefono"></label><br>
+            <label>Dirección: <input type="text" id="direccion" name="direccion"></label><br>
+            <button type="submit">Actualizar perfil</button>
+        </form>
+    </section>
+
+    <hr>
+
+
+    <section>
+        <h2>Cambiar contraseña</h2>
+        <form id="formContrasena">
+            <label>Contraseña actual: <input type="password" id="actual" name="actual"></label><br>
+            <label>Nueva contraseña: <input type="password" id="nueva" name="nueva"></label><br>
+            <label>Confirmar: <input type="password" id="confirmar" name="confirmar"></label><br>
+            <button type="submit">Cambiar</button>
+        </form>
+    </section>
+
+    <hr>
+
+
+    <section>
+        <h2>Registrar horas</h2>
+        <form id="formHoras">
+            <label>Fecha: <input type="date" id="fecha" name="fecha"></label><br>
+            <label>Cantidad: <input type="number" id="cantidad" name="cantidad"></label><br>
+            <label>Tipo:
+                <select id="tipo" name="tipo">
+                    <option value="ayuda_mutua">Ayuda Mutua</option>
+                    <option value="guardia">Guardia</option>
+                </select>
+            </label><br>
+            <label>Motivo: <input type="text" id="motivo" name="motivo"></label><br>
+            <button type="submit">Registrar</button>
+        </form>
+    </section>
+
+    <hr>
+
+
+    <section>
+        <h2>Subir comprobante de pago</h2>
+        <form id="formComprobante" enctype="multipart/form-data">
+            <input type="file" id="archivo" name="archivo"><br>
+            <button type="submit">Subir</button>
+        </form>
+    </section>
+
+    <hr>
+
+    <button id="btnSalir">Cerrar sesión</button>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="js/env.js"></script>
+    <script src="js/login.js"></script>
     <script src="js/index.js"></script>
 </body>
 
