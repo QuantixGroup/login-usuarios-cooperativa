@@ -1,23 +1,135 @@
 $(document).ready(function () {
-    const token = localStorage.getItem("access_token");
-    if (!token) return mostrarMensaje("Acceso no autorizado.");
+    const token = sessionStorage.getItem("tokenAcceso");
+    if (!token) {
+        alert("Debes iniciar sesión primero");
+        window.location.href = "login.html";
+        return;
+    }
 
     $.ajax({
-        url: "http://localhost:8000/api/validate",
+        url: API_USUARIOS + "/perfil",
         type: "GET",
         headers: {
-            "Authorization": "Bearer " + token,
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": "Bearer " + token
         },
-        success: mostrarBienvenida,
-        error: () => mostrarMensaje("Sesión inválida. Iniciá sesión de nuevo.")
+        success: function (data) {
+            $("#nombre").val(data.nombre);
+            $("#apellido").val(data.apellido);
+            $("#telefono").val(data.telefono);
+            $("#direccion").val(data.direccion);
+        },
+        error: function () {
+            alert("Error al cargar perfil");
+        }
     });
 
-    function mostrarBienvenida(user) {
-        $("#bienvenida").text("Bienvenido, " + user.nombre);
-    }
+    $("#formPerfil").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: API_USUARIOS + "/perfil",
+            type: "PUT",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            data: {
+                nombre: $("#nombre").val(),
+                apellido: $("#apellido").val(),
+                telefono: $("#telefono").val(),
+                direccion: $("#direccion").val()
+            },
+            success: function () {
+                alert("Perfil actualizado correctamente");
+            },
+            error: function () {
+                alert("Error al actualizar perfil");
+            }
+        });
+    });
 
-    function mostrarMensaje(msg) {
-        $("#bienvenida").text(msg);
-    }
+    $("#formContrasena").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: API_USUARIOS + "/perfil/contrasena",
+            type: "PUT",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            data: {
+                contrasena_actual: $("#actual").val(),
+                contrasena_nueva: $("#nueva").val(),
+                contrasena_nueva_confirmation: $("#confirmar").val()
+            },
+            success: function () {
+                alert("Contraseña cambiada con éxito");
+            },
+            error: function () {
+                alert("Error al cambiar la contraseña");
+            }
+        });
+    });
+
+    $("#formHoras").submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "http://127.0.0.1:8001/api/horas",
+            type: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            data: {
+                fecha: $("#fecha").val(),
+                cantidad: $("#cantidad").val(),
+                tipo: $("#tipo").val(),
+                motivo: $("#motivo").val()
+            },
+            success: function () {
+                alert("Horas registradas correctamente");
+            },
+            error: function () {
+                alert("Error al registrar horas");
+            }
+        });
+    });
+
+    $("#formComprobante").submit(function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        $.ajax({
+            url: "http://127.0.0.1:8001/api/comprobantes",
+            type: "POST",
+            headers: { "Authorization": "Bearer " + token },
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function () {
+                alert("Comprobante subido con éxito");
+            },
+            error: function () {
+                alert("Error al subir comprobante");
+            }
+        });
+    });
+
+    $("#btnSalir").click(function () {
+        $.ajax({
+            url: API_USUARIOS + "/cerrar-sesion",
+            type: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            complete: function () {
+                sessionStorage.removeItem("tokenAcceso");
+                window.location.href = "login.html";
+            }
+        });
+    });
 });
