@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <div id="sidebar" class="sidebar"></div>
+        <div id="main-content" class="main-content">
+            <h1>Mi Perfil</h1>
+            <form class="perfil-form">
+                <div class="perfil-grid">
+                    <div>
+                        <label>Nombre<br><input type="text" id="nombre" placeholder="Nombre"></label>
+                        <label>Apellido<br><input type="text" id="apellido" placeholder="Apellido"></label>
+                        <label>Email<br><input type="email" id="email" placeholder="Email"></label>
+                        <label>Departamento<br><input type="text" id="departamento" placeholder="Departamento"></label>
+                        <label>Ciudad<br><input type="text" id="ciudad" placeholder="Ciudad"></label>
+                        <label>Ingresos Mensuales<br><input type="text" id="ingresos"
+                                placeholder="Ingresos Mensuales"></label>
+                        <form id="formComprobante" enctype="multipart/form-data" class="comprobante-form">
+                            <label>Comprobante de Ingresos<br>
+                                <input type="file" id="archivo" name="archivo">
+                                <button type="submit" class="btn-archivo">Adjuntar Archivo</button>
+                            </label>
+                        </form>
+                        <label>Estado Civil<br><input type="text" id="estadoCivil" placeholder="Estado Civil"></label>
+                        <label>Integrantes del Nucleo Familiar<br><textarea id="nucleoFamiliar"
+                                placeholder="Integrantes del Núcleo Familiar"></textarea></label>
+                    </div>
+                    <div>
+                        <label>Documento<br><input type="text" id="documento" placeholder="Documento"></label>
+                        <label>Fecha de Nacimiento<br><input type="text" id="fechaNacimiento"
+                                placeholder="Fecha de Nacimiento"></label>
+                        <label>Telefono<br><input type="text" id="telefono" placeholder="Teléfono"></label>
+                        <label>Situación Laboral<br><input type="text" id="situacionLaboral"
+                                placeholder="Situación Laboral"></label>
+                        <label>Cantidad de Integrantes<br><input type="text" id="cantidadIntegrantes"
+                                placeholder="Cantidad de Integrantes"></label>
+                        <div class="perfil-foto">
+                            <form action="/api/usuario/foto" class="dropzone" id="fotoDropzone"></form>
+                        </div>
+                    </div>
+                </div>
+                <div class="perfil-guardar">
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        Dropzone.options.fotoDropzone = {
+            paramName: "foto",
+            maxFiles: 1,
+            acceptedFiles: "image/*",
+            headers: { "Authorization": "Bearer " + sessionStorage.getItem("tokenAcceso") },
+            success: function (file, response) {
+                alert("Foto subida correctamente");
+            },
+            error: function (file, response) {
+                alert("Error al subir la foto");
+            }
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+
+.body-background {
+    background-image: url('../src/img/fondoContruccion.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    @include bs.media-breakpoint-down(sm) {
+        background-size: auto;
+    }
+}
+
+h1 {
+    font-family: vars.$font-title;
+    color: vars.$text-color-secondary;
+    font-size: 3rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+
+    @include bs.media-breakpoint-down(sm) {
+        font-size: 2rem;
+    }
+}
+
+.card {
+    background-color: vars.$bg-color-secondary;
+    font-family: vars.$font-subtitle;
+    color: vars.$text-color-primary;
+    padding: 1rem;
+
+    @include bs.media-breakpoint-down(sm) {
+        padding: 0.5rem;
+        border-radius: 1rem;
+    }
+}
+
+.card-body,
+.label {
+    font-family: vars.$font-subtitle;
+    color: vars.$text-color-primary;
+}
+
+.input-group-text {
+    cursor: pointer;
+}

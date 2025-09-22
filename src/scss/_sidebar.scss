@@ -1,0 +1,121 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+
+.sidebar-nav {
+    background: vars.$bg-color-primary;
+    color: vars.$text-color-secondary;
+    min-height: 100vh;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+
+}
+
+.sidebar-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.sidebar-logo {
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-logo img {
+    width: 80%;
+    max-width: 180px;
+    height: auto;
+}
+
+.sidebar-text-logo {
+    margin-top: 1rem;
+    color: vars.$text-color-secondary;
+    font-family: vars.$font-sidebar;
+    display: flex;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: none;
+}
+
+.sidebar-links {
+    margin-top: 4rem;
+}
+
+.sidebar-links {
+    margin-top: 4rem;
+
+    ul,
+    ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+.sidebar-links li {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.sidebar-links a.nav-link {
+    color: vars.$text-color-secondary;
+    font-family: vars.$font-sidebar;
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 0.75rem 0.5rem 1rem;
+    transition: background 0.2s;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.sidebar-nav .nav-link:hover,
+.sidebar-nav .nav-link.active {
+    background-color: #fffdf9;
+    color: #1b4965;
+    background-color: vars.$bg-color-tertiary;
+    color: vars.$text-color-primary;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.sidebar-links .nav-link i {
+    margin-right: 1rem;
+    font-size: 1rem;
+}
+
+@media (max-width: 767.98px) {
+    .sidebar-nav {
+        position: relative;
+        width: 100%;
+        height: auto;
+        z-index: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}

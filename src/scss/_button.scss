@@ -1,8 +1,12 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+
 %btn-base {
-  font-family: $font-button;
+  font-family: vars.$font-button;
   font-weight: 200;
-  color: $bg-color-secondary;
-  background-color: $bg-color-primary;
+  color: vars.$bg-color-secondary;
+  background-color: vars.$bg-color-primary;
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
@@ -13,7 +17,7 @@
 
 @mixin btn-hover-effect {
   background-image: linear-gradient(to top, #1B4965 30%, #3693CB 80%);
-  color: $text-color-secondary;
+  color: vars.$text-color-secondary;
   transform: translateY(-2px);
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
   -webkit-transform: translateY(-2px);
@@ -30,6 +34,7 @@
   &:hover {
     @include btn-hover-effect;
   }
+
 }
 
 .btn-enviar,

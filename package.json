@@ -36,7 +36,9 @@
 
   "dependencies": {
 
-    "bootstrap": "^5.3.7"
+    "bootstrap": "^5.3.7",
+
+    "sass": "^1.93.0"
 
   }
 

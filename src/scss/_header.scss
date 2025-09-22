@@ -1,8 +1,12 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+
 .img-logo {
     max-width: 12rem;
     height: auto;
 
-    @include media-breakpoint-down(sm) {
+    @include bs.media-breakpoint-down(sm) {
         max-width: 10rem;
     }
 }
