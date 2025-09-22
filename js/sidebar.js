@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  // inyectar Font Awesome si no está cargado para que los iconos del sidebar se vean en todas las páginas
   var faHref =
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
   var faPresent = false;
@@ -21,7 +20,6 @@ $(document).ready(function () {
   }
 
   $("#sidebar").load("sidebar.html", function () {
-    // después de cargar el sidebar, marcar el enlace activo según la URL
     var currentUrl = new URL(window.location.href);
     $(this)
       .find("a.nav-link")
@@ -30,12 +28,9 @@ $(document).ready(function () {
         var href = link.attr("href");
         if (!href) return;
         try {
-          // resolver href relativo en base a la página actual
           var resolved = new URL(href, window.location.href);
           var linkPath = resolved.pathname.replace(/\/+$/, "");
           var currentPath = currentUrl.pathname.replace(/\/+$/, "");
-
-          // marcar activo si las rutas coinciden exactamente o coinciden en el segmento final
           var samePath = linkPath === currentPath;
           var sameBasename =
             linkPath.split("/").pop() === currentPath.split("/").pop();
@@ -46,7 +41,6 @@ $(document).ready(function () {
             link.removeClass("active").removeAttr("aria-current");
           }
         } catch (e) {
-          // en caso de URL inválida, no hacer nada
         }
       });
   });
