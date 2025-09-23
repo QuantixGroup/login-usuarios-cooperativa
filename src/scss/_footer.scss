@@ -1,0 +1,11 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: vars.$font-footer;
+    color: vars.$text-color-primary;
+}

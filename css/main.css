@@ -11867,28 +11867,15 @@ textarea.form-control-lg {
   }
 }
 
-h1 {
+header h1 {
   font-family: "Roboto", sans-serif;
   color: #f6f6f6;
   font-size: 3rem;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
 }
 @media (max-width: 575.98px) {
-  h1 {
+  header h1 {
     font-size: 2rem;
-  }
-}
-
-.card {
-  background-color: #f6f6f6;
-  font-family: "Montserrat", sans-serif;
-  color: #1b4965;
-  padding: 1rem;
-}
-@media (max-width: 575.98px) {
-  .card {
-    padding: 0.5rem;
-    border-radius: 1rem;
   }
 }
 
@@ -11921,15 +11908,8 @@ h1 {
   flex-direction: column;
   align-items: center;
   width: 100%;
-}
-
-.sidebar-logo {
-  position: absolute;
-  left: 50%;
-  bottom: 2rem;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
+  margin-top: auto;
+  padding: 2rem 0;
 }
 
 .sidebar-logo img {
@@ -11946,10 +11926,6 @@ h1 {
   font-size: 1.5rem;
   font-weight: bold;
   text-shadow: none;
-}
-
-.sidebar-links {
-  margin-top: 4rem;
 }
 
 .sidebar-links {
@@ -11975,14 +11951,14 @@ h1 {
 .sidebar-links a.nav-link {
   color: #f6f6f6;
   font-family: "Roboto", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
   box-sizing: border-box;
-  padding: 0.5rem 0.75rem 0.5rem 1rem;
+  padding: 0.75rem 0.75rem 0.75rem 1rem;
   transition: background 0.2s;
 }
 .sidebar-links a.nav-link:hover {
@@ -12030,6 +12006,7 @@ body {
   background-color: #fffdf9;
   color: #1b4965;
   height: 100%;
+  min-height: 100vh;
 }
 
 .app-container {
@@ -12037,14 +12014,14 @@ body {
   padding: 0;
   display: flex;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   font-family: "Montserrat", sans-serif;
   color: #1b4965;
 }
 
 .container {
   display: flex;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .sidebar {
@@ -12054,7 +12031,14 @@ body {
 }
 
 .main-content {
-  margin-left: 250px;
+  margin-left: 275px;
+}
+
+.main-content h1 {
+  font-family: "Montserrat", sans-serif;
+  color: #1b4965;
+  margin-bottom: 1rem;
+  font-size: 2rem;
 }
 
 .btn-enviar,
@@ -12100,4 +12084,22 @@ body {
   -moz-transform: translateY(-2px);
   -ms-transform: translateY(-2px);
   -o-transform: translateY(-2px);
+}
+
+#meetings {
+  margin-top: 0.5rem;
+}
+
+#meetings .list-group-item {
+  background: transparent;
+  border: none;
+  padding-left: 0;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  color: #1b4965;
 }/*# sourceMappingURL=main.css.map */

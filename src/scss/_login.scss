@@ -14,7 +14,7 @@
     }
 }
 
-h1 {
+header h1 {
     font-family: vars.$font-title;
     color: vars.$text-color-secondary;
     font-size: 3rem;
@@ -22,18 +22,6 @@ h1 {
 
     @include bs.media-breakpoint-down(sm) {
         font-size: 2rem;
-    }
-}
-
-.card {
-    background-color: vars.$bg-color-secondary;
-    font-family: vars.$font-subtitle;
-    color: vars.$text-color-primary;
-    padding: 1rem;
-
-    @include bs.media-breakpoint-down(sm) {
-        padding: 0.5rem;
-        border-radius: 1rem;
     }
 }
 

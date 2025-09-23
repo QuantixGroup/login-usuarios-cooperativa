@@ -52,25 +52,15 @@
             </form>
         </div>
     </div>
+    <div id="footer" class="footer"></div>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/index.js"></script>
-    <script>
-        Dropzone.options.fotoDropzone = {
-            paramName: "foto",
-            maxFiles: 1,
-            acceptedFiles: "image/*",
-            headers: { "Authorization": "Bearer " + sessionStorage.getItem("tokenAcceso") },
-            success: function (file, response) {
-                alert("Foto subida correctamente");
-            },
-            error: function (file, response) {
-                alert("Error al subir la foto");
-            }
-        };
-    </script>
+    <script src="js/perfil.js"></script>
+    <script src="js/footer.js"></script>
+
 </body>
 
 </html>

@@ -1,0 +1,13 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+
+#meetings {
+    margin-top: 0.5rem;
+}
+
+#meetings .list-group-item {
+    background: transparent;
+    border: none;
+    padding-left: 0;
+}
