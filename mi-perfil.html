@@ -4,52 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <title>Mi Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-..." crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <div class="app-container">
-        <div id="sidebar" class="sidebar"></div>
-        <div id="main-content" class="main-content">
-            <h1>Mi Perfil</h1>
-            <form class="perfil-form">
-                <div class="perfil-grid">
-                    <div>
-                        <label>Nombre<br><input type="text" id="nombre" placeholder="Nombre"></label>
-                        <label>Apellido<br><input type="text" id="apellido" placeholder="Apellido"></label>
-                        <label>Email<br><input type="email" id="email" placeholder="Email"></label>
-                        <label>Departamento<br><input type="text" id="departamento" placeholder="Departamento"></label>
-                        <label>Ciudad<br><input type="text" id="ciudad" placeholder="Ciudad"></label>
-                        <label>Ingresos Mensuales<br><input type="text" id="ingresos"
-                                placeholder="Ingresos Mensuales"></label>
-                        <form id="formComprobante" enctype="multipart/form-data" class="comprobante-form">
-                            <label>Comprobante de Ingresos<br>
-                                <input type="file" id="archivo" name="archivo">
-                                <button type="submit" class="btn-archivo">Adjuntar Archivo</button>
-                            </label>
-                        </form>
-                        <label>Estado Civil<br><input type="text" id="estadoCivil" placeholder="Estado Civil"></label>
-                        <label>Integrantes del Nucleo Familiar<br><textarea id="nucleoFamiliar"
-                                placeholder="Integrantes del Núcleo Familiar"></textarea></label>
-                    </div>
-                    <div>
-                        <label>Documento<br><input type="text" id="documento" placeholder="Documento"></label>
-                        <label>Fecha de Nacimiento<br><input type="text" id="fechaNacimiento"
-                                placeholder="Fecha de Nacimiento"></label>
-                        <label>Telefono<br><input type="text" id="telefono" placeholder="Teléfono"></label>
-                        <label>Situación Laboral<br><input type="text" id="situacionLaboral"
-                                placeholder="Situación Laboral"></label>
-                        <label>Cantidad de Integrantes<br><input type="text" id="cantidadIntegrantes"
-                                placeholder="Cantidad de Integrantes"></label>
-                        <div class="perfil-foto">
-                            <form action="/api/usuario/foto" class="dropzone" id="fotoDropzone"></form>
+    <div id="sidebar" class="sidebar"></div>
+    <div class="main-content d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="container-fluid" style="max-width: 1400px;">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <h2 class="mb-4 text-center">Mi Perfil</h2>
+                    <form class="perfil-form">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Nombre</span>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Apellido</span>
+                                    <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Email</span>
+                                    <input type="email" class="form-control" id="email" placeholder="Email">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Departamento</span>
+                                    <input type="text" class="form-control" id="departamento"
+                                        placeholder="Departamento">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Ciudad</span>
+                                    <input type="text" class="form-control" id="ciudad" placeholder="Ciudad">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Ingresos Mensuales</span>
+                                    <input type="text" class="form-control" id="ingresos"
+                                        placeholder="Ingresos Mensuales">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Comprobante de Ingresos</span>
+                                    <input type="file" id="archivo" name="archivo" class="form-control">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Estado Civil</span>
+                                    <input type="text" class="form-control" id="estadoCivil" placeholder="Estado Civil">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Integrantes del Núcleo Familiar</span>
+                                    <textarea class="form-control" id="nucleoFamiliar"
+                                        placeholder="Integrantes del Núcleo Familiar"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Documento</span>
+                                    <input type="text" class="form-control" id="documento" placeholder="Documento">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Fecha de Nacimiento</span>
+                                    <input type="date" class="form-control" id="fechaNacimiento"
+                                        placeholder="Fecha de Nacimiento">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Teléfono</span>
+                                    <input type="text" class="form-control" id="telefono" placeholder="Teléfono">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Situación Laboral</span>
+                                    <input type="text" class="form-control" id="situacionLaboral"
+                                        placeholder="Situación Laboral">
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <span class="me-2" style="min-width:140px;">Cantidad de Integrantes</span>
+                                    <input type="text" class="form-control" id="cantidadIntegrantes"
+                                        placeholder="Cantidad de Integrantes">
+                                </div>
+                                <div class="d-flex flex-column align-items-center mt-5">
+                                    <img src="src/img/user-placeholder.png" alt="Foto de Perfil" class="foto-img mb-3"
+                                        style="width:180px;height:180px;object-fit:cover;border-radius:20px;border:2px solid #ccc;">
+                                    <button type="button" class="btn btn-primary btn-foto">Agregar foto</button>
+                                    <form id="fotoDropzone" class="dropzone mt-2" style="width:180px;"
+                                        action="/ruta/a/tu/api/upload"></form>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center">
+                                <button type="submit" class="btn btn-success btn-guardar">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="perfil-guardar">
-                    <button type="submit" class="btn-guardar">Guardar</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
     <div id="footer" class="footer"></div>
@@ -57,10 +108,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
     <script src="js/sidebar.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/perfil.js"></script>
+    <script src="js/env.js"></script>
     <script src="js/footer.js"></script>
-
+</body>
 </body>
 
 </html>
