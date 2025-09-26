@@ -7,95 +7,99 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
     <div id="sidebar" class="sidebar"></div>
-    <div class="main-content d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="container-fluid" style="max-width: 1400px;">
+
+    <div class="main-content d-flex justify-content-center align-items-center">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <h2 class="mb-4 text-center">Mi Perfil</h2>
+                    <h1 class="mb-4 mt-5 text-center">Mi Perfil</h1>
                     <form class="perfil-form">
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Nombre</span>
-                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                                    <span class="me-2">Nombre</span>
+                                    <input type="text" class="form-control bg-body-secondary" id="nombre"
+                                        placeholder="Nombre" readonly>
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Apellido</span>
-                                    <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+                                    <span class="me-2">Apellido</span>
+                                    <input type="text" class="form-control bg-body-secondary" id="apellido"
+                                        placeholder="Apellido" readonly>
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Email</span>
+                                    <span class="me-2">Email</span>
                                     <input type="email" class="form-control" id="email" placeholder="Email">
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Departamento</span>
-                                    <input type="text" class="form-control" id="departamento"
-                                        placeholder="Departamento">
+                                    <span class="me-2">Departamento</span>
+                                    <input type="text" class="form-control bg-body-secondary" id="departamento"
+                                        placeholder="Departamento" readonly>
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Ciudad</span>
-                                    <input type="text" class="form-control" id="ciudad" placeholder="Ciudad">
+                                    <span class="me-2">Ciudad</span>
+                                    <input type="text" class="form-control bg-body-secondary" id="ciudad"
+                                        placeholder="Ciudad" readonly>
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Ingresos Mensuales</span>
+                                    <span class="me-2">Ingresos Mensuales</span>
                                     <input type="text" class="form-control" id="ingresos"
                                         placeholder="Ingresos Mensuales">
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Comprobante de Ingresos</span>
+                                    <span class="me-2">Comprobante de Ingresos</span>
                                     <input type="file" id="archivo" name="archivo" class="form-control">
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Estado Civil</span>
+                                    <span class="me-2">Estado Civil</span>
                                     <input type="text" class="form-control" id="estadoCivil" placeholder="Estado Civil">
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Integrantes del Núcleo Familiar</span>
-                                    <textarea class="form-control" id="nucleoFamiliar"
+                                    <span class="me-">Integrantes del Núcleo Familiar</span>
+                                    <textarea class="form-control textarea" id="nucleoFamiliar" rows="5"
                                         placeholder="Integrantes del Núcleo Familiar"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Documento</span>
-                                    <input type="text" class="form-control" id="documento" placeholder="Documento">
+                                    <span class="me-2">Documento</span>
+                                    <input type="text" class="form-control bg-body-secondary" id="documento"
+                                        placeholder="Documento" readonly>
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Fecha de Nacimiento</span>
-                                    <input type="date" class="form-control" id="fechaNacimiento"
-                                        placeholder="Fecha de Nacimiento">
+                                    <span class="me-2">Fecha de Nacimiento</span>
+                                    <input type="date" class="form-control bg-body-secondary" id="fechaNacimiento"
+                                        placeholder="Fecha de Nacimiento" readonly>
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Teléfono</span>
+                                    <span class="me-2">Teléfono</span>
                                     <input type="text" class="form-control" id="telefono" placeholder="Teléfono">
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Situación Laboral</span>
+                                    <span class="me-2">Situación Laboral</span>
                                     <input type="text" class="form-control" id="situacionLaboral"
                                         placeholder="Situación Laboral">
                                 </div>
                                 <div class="mb-3 d-flex align-items-center">
-                                    <span class="me-2" style="min-width:140px;">Cantidad de Integrantes</span>
+                                    <span class="me-2">Cantidad de Integrantes</span>
                                     <input type="text" class="form-control" id="cantidadIntegrantes"
                                         placeholder="Cantidad de Integrantes">
                                 </div>
-                                <div class="d-flex flex-column align-items-center mt-5">
-                                    <img src="src/img/user-placeholder.png" alt="Foto de Perfil" class="foto-img mb-3"
-                                        style="width:180px;height:180px;object-fit:cover;border-radius:20px;border:2px solid #ccc;">
-                                    <button type="button" class="btn btn-primary btn-foto">Agregar foto</button>
-                                    <form id="fotoDropzone" class="dropzone mt-2" style="width:180px;"
-                                        action="/ruta/a/tu/api/upload"></form>
+                                <div class="d-flex flex-row align-items-center mt-5 justify-content-center">
+                                    <img src="src/img/user-placeholder.png" alt="Foto de Perfil" class="foto-img mb-3">
+                                    <button type="button" class="btn btn-primary btn-foto ms-3"
+                                        style="position:relative;z-index:10000;">Agregar foto</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center mt-2">
                             <div class="col-md-6 text-center">
-                                <button type="submit" class="btn btn-success btn-guardar">Guardar</button>
+                                <button type="submit" class="btn-guardar">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -104,13 +108,18 @@
         </div>
     </div>
     <div id="footer" class="footer"></div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
+    <form id="fotoDropzone" class="dropzone mt-2" style="display:none;" action="http://localhost:8000/api/perfil/foto"
+        enctype="multipart/form-data">
+    </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <script>if (window.Dropzone) Dropzone.autoDiscover = false;</script>
     <script src="js/sidebar.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/perfil.js"></script>
     <script src="js/env.js"></script>
     <script src="js/footer.js"></script>
-</body>
+
 </body>
 
 </html>

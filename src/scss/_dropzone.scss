@@ -1,0 +1,41 @@
+@use "variables" as vars;
+
+
+.dropzone {
+    min-height: 240px;
+    border: 2.5px dashed #3693CB;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f8fafc 70%, #e3f2fd 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3693CB;
+    font-size: 1.35rem;
+    margin-top: 2rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 16px rgba(54, 147, 203, 0.08);
+    position: relative;
+}
+
+.dropzone.dz-started {
+    border-color: #1B4965;
+    box-shadow: 0 4px 24px rgba(54, 147, 203, 0.18);
+}
+
+.dropzone .dz-message {
+    color: #3693CB;
+    font-size: 1.15rem;
+    font-weight: 500;
+    text-align: center;
+    font-family: vars.$font-text;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropzone .dz-message:before {
+    content: "📷";
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}

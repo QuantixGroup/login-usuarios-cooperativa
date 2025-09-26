@@ -2,56 +2,6 @@
 @use "mixins" as *;
 @use "../../node_modules/bootstrap/scss/bootstrap" as bs;
 
-.perfil-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
-}
-
-.perfil-row label {
-    min-width: 160px;
-    font-weight: 500;
-    margin-bottom: 0;
-    text-align: right;
-}
-
-.perfil-row input,
-.perfil-row textarea {
-    flex: 1 1 auto;
-    padding: 0.5rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    margin-top: 0;
-}
-
-.perfil-row .btn-archivo {
-    margin-left: 1rem;
-}
-
-@use "variables" as vars;
-
-.perfil-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.perfil-col1,
-.perfil-col2 {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.perfil-foto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-}
 
 .foto-img {
     width: 180px;
@@ -59,7 +9,10 @@
     object-fit: cover;
     border-radius: 20px;
     border: 2px solid #ccc;
-    margin-bottom: 1rem;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
 }
 
 .btn-foto {
@@ -94,10 +47,68 @@
 
 .perfil-form input,
 .perfil-form textarea {
-    width: 100%;
+    width: 130%;
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;
     margin-top: 0.25rem;
     font-size: 1rem;
+}
+
+input[readonly] {
+    background-color: vars.$bg-color-secondary;
+    cursor: not-allowed;
+}
+
+.container-fluid span {
+    min-width: 140px;
+    display: block;
+    font-family: vars.$font-form;
+    font-weight: bold;
+}
+
+.alert-exito,
+.alert-error {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+    max-width: 380px;
+    width: fit-content;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1;
+
+    &.alert-exito {
+        background-color: vars.$bg-color-success;
+    }
+
+    &.alert-error {
+        background-color: vars.$bg-color-error;
+    }
+}
+
+.alert-exito.fade-out,
+.alert-error.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+.icon {
+    background: vars.$bg-color-secondary;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.alert-exito-text,
+.alert-error-text {
+    font-family: vars.$font-text;
+    color: vars.$text-color-secondary;
 }
