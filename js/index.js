@@ -138,4 +138,107 @@ $(document).ready(function () {
       },
     });
   });
+
+  window.loadHorasResumen = async function () {
+    try {
+      const base =
+        typeof API_COOPERATIVA !== "undefined"
+          ? API_COOPERATIVA
+          : typeof API_USUARIOS !== "undefined"
+          ? API_USUARIOS
+          : "http://localhost:8000/api";
+      const url = base + "/horas";
+      const token =
+        sessionStorage.getItem("token") ||
+        sessionStorage.getItem("tokenAcceso") ||
+        "";
+      const options = token
+        ? { headers: { Authorization: "Bearer " + token } }
+        : {};
+      const res = await fetch(url, options);
+      let list = [];
+      if (res.ok) {
+        const data = await res.json();
+        list = Array.isArray(data) ? data : data.data || [];
+      } else {
+      }
+
+      const now = new Date();
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
+      let total = 0;
+
+      for (const r of list) {
+        const d = new Date(r.fecha + "T00:00:00");
+        if (d.getMonth() === currentMonth && d.getFullYear() === currentYear) {
+          total += Number(r.horas) || 0;
+        }
+      }
+
+      const card = $(".card").filter(function () {
+        return (
+          $(this).find("h5.card-title").first().text().trim() ===
+          "Horas trabajadas"
+        );
+      });
+      if (card.length) {
+        const body = card.find(".card-body").first();
+        let container = body.find(".horas-resumen");
+        if (!container.length) {
+          const title = body.find("h5.card-title").first();
+          container = $('<div class="horas-resumen mt-2"></div>');
+          title.after(container);
+        }
+
+        const groups = {};
+        for (const r of list) {
+          const d = new Date(r.fecha + "T00:00:00");
+          const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
+            2,
+            "0"
+          )}`;
+          if (!groups[key])
+            groups[key] = {
+              label: new Intl.DateTimeFormat("es-ES", {
+                month: "long",
+                year: "numeric",
+              }).format(d),
+              items: [],
+            };
+          groups[key].items.push(r);
+        }
+
+        const keys = Object.keys(groups).sort((a, b) => (a < b ? 1 : -1));
+        const showKeys = keys.slice(0, 3);
+
+        const out = [];
+        out.push(
+          `<p class="mb-1">Total este mes: <strong>${total.toFixed(
+            2
+          )} h</strong></p>`
+        );
+        if (!showKeys.length) {
+          out.push('<div class="small text-muted">No hay registros aún.</div>');
+        } else {
+          for (const k of showKeys) {
+            const g = groups[k];
+            out.push(`<div class="mt-2"><strong>${g.label}</strong></div>`);
+            for (const it of g.items.slice(0, 5)) {
+              out.push(
+                `<div class="hora-line small text-muted">${it.fecha} — ${Number(
+                  it.horas
+                ).toFixed(2)} h${
+                  it.descripcion ? " — " + it.descripcion : ""
+                }</div>`
+              );
+            }
+          }
+        }
+
+        container.html(out.join("\n"));
+      }
+    } catch (e) {}
+  };
+
+  window.loadHorasResumen();
 });

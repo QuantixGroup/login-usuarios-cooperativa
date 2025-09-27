@@ -1,0 +1,13 @@
+<div class="mb-3">
+    <label class="form-label">Recibo: <strong id="pago-recibo-label">-</strong></label>
+</div>
+<form id="form-subir-comprobante">
+    <div class="mb-3">
+        <label for="comprobante" class="form-label">Comprobante (PDF)</label>
+        <input type="file" id="comprobante" name="comprobante" accept="application/pdf" class="form-control" required>
+    </div>
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Subir y marcar pagado</button>
+        <button type="button" class="btn btn-secondary" id="btn-cancel-pago">Cancelar</button>
+    </div>
+</form>

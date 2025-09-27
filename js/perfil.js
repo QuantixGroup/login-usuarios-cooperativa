@@ -25,8 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("ingresos").value =
           data.ingresos_mensuales || "";
         document.getElementById("estadoCivil").value = data.estado_civil || "";
-        document.getElementById("nucleoFamiliar").value =
-          data.nucleo_familiar || "";
         document.getElementById("documento").value = data.cedula || "";
         document.getElementById("fechaNacimiento").value =
           data.fecha_nacimiento || "";
@@ -58,9 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .getElementById("cantidadIntegrantes")
         .value.trim();
       const estadoCivil = document.getElementById("estadoCivil").value.trim();
-      const nucleoFamiliar = document
-        .getElementById("nucleoFamiliar")
-        .value.trim();
 
       if (
         !email ||
@@ -68,8 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
         !telefono ||
         !situacionLaboral ||
         !cantidadIntegrantes ||
-        !estadoCivil ||
-        !nucleoFamiliar
+        !estadoCivil
       ) {
         mostrarMensajeAlerta("error");
         return;
@@ -82,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
         situacion_laboral: situacionLaboral,
         cantidad_integrantes: cantidadIntegrantes,
         estado_civil: estadoCivil,
-        nucleo_familiar: nucleoFamiliar,
       };
 
       fetch("http://localhost:8000/api/perfil", {
