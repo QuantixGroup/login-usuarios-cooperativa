@@ -83,7 +83,21 @@ document.addEventListener("DOMContentLoaded", function () {
       (t.id === "btn-abrir-registro-horas" ||
         (t.closest && t.closest("#btn-abrir-registro-horas")))
     ) {
-      const modalEl = document.getElementById("modalRegistroHoras");
+      let modalEl = document.getElementById("modalRegistroHoras");
+      if (!modalEl) {
+        try {
+          const response = await fetch("modals/modal-registro-horas.html");
+          if (response.ok) {
+            const modalHtml = await response.text();
+            document.body.insertAdjacentHTML("beforeend", modalHtml);
+            modalEl = document.getElementById("modalRegistroHoras");
+          }
+        } catch (error) {
+          showAlert("error", "Error al cargar el modal");
+          return;
+        }
+      }
+
       const modalBody = document.getElementById("modalRegistroHorasBody");
       const bs =
         bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
