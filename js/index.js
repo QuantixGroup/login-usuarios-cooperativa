@@ -82,19 +82,21 @@ $(document).ready(function () {
   $("#formHoras").submit(function (e) {
     e.preventDefault();
     $.ajax({
-      url: "http://127.0.0.1:8001/api/horas",
+      url: API_COOPERATIVA
+        ? API_COOPERATIVA + "/horas/registro"
+        : "http://127.0.0.1:8001/api/horas/registro",
       type: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
-      data: {
+      data: JSON.stringify({
         fecha: $("#fecha").val(),
-        cantidad: $("#cantidad").val(),
-        tipo: $("#tipo").val(),
-        motivo: $("#motivo").val(),
-      },
+        conteo_de_horas: parseFloat($("#cantidad").val() || 0),
+        tipo_trabajo: $("#tipo").val(),
+        descripcion: $("#motivo").val(),
+      }),
       success: function () {
         alert("Horas registradas correctamente");
       },
@@ -240,5 +242,4 @@ $(document).ready(function () {
     } catch (e) {}
   };
 
-  window.loadHorasResumen();
 });

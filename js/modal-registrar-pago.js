@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
           "success",
           json.message || "Recibo actualizado correctamente"
         );
-        if (window.loadHorasResumen) window.loadHorasResumen();
       } else {
         throw new Error(json.message || res.statusText);
       }
