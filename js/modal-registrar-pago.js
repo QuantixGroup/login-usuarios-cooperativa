@@ -135,10 +135,16 @@ document.addEventListener("DOMContentLoaded", function () {
           form.addEventListener("submit", function (e) {
             e.preventDefault();
 
+            const montoInput = form.querySelector("#monto");
+            const monto = parseFloat(montoInput.value);
             const fileInput = form.querySelector("#comprobante");
             const file = fileInput.files[0];
             const submitBtn = form.querySelector('button[type="submit"]');
 
+            if (!monto || monto <= 0) {
+              showAlert("error", "Ingrese un monto válido mayor a 0");
+              return;
+            }
             if (!file) {
               showAlert("error", "Seleccione un comprobante PDF");
               return;
