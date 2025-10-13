@@ -1,6 +1,6 @@
 @use "variables" as vars;
 @use "mixins" as *;
-@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+@use "bootstrap/scss/bootstrap" as bs;
 
 #meetings {
     margin-top: 0.5rem;

@@ -1,5 +1,6 @@
 @use "variables" as vars;
-
+@use "mixins" as *;
+@use "bootstrap/scss/bootstrap" as bs;
 
 .dropzone {
     min-height: 240px;
@@ -38,4 +39,18 @@
     font-size: 2.2rem;
     margin-bottom: 0.5rem;
     display: block;
+}
+
+.btn-foto-perfil {
+    @include btn-base;
+    @include button-gradient;
+    font-size: 1rem;
+    position: relative;
+    z-index: 10000;
+}
+
+html[data-bs-theme="dark"] .btn-foto-perfil,
+body.dark .btn-foto-perfil {
+    @include button-gradient-dark;
+    font-size: 1rem;
 }

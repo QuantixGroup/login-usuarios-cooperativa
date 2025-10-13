@@ -5,8 +5,8 @@
 @use "sidebar";
 @use "header";
 @use "body";
-@use "button";
+@use "buttons";
 @use "index-inicio";
 @use "perfil";
 @use "footer";
-@use "../../node_modules/bootstrap/scss/bootstrap";
+@use "bootstrap/scss/bootstrap" as bs;

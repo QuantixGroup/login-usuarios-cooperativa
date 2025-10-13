@@ -119,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       renderList(listContainer, arr);
     } catch (err) {
-      console.error(err);
       modalBody.innerHTML =
         '<div class="p-3 text-danger">No se pudo cargar la lista.</div>';
     }

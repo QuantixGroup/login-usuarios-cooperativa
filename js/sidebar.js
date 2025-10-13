@@ -40,8 +40,20 @@ $(document).ready(function () {
           } else {
             link.removeClass("active").removeAttr("aria-current");
           }
-        } catch (e) {
-        }
+        } catch (e) {}
       });
+
+    if (window.cooperativaGetTheme) {
+      const currentTheme = window.cooperativaGetTheme();
+      const isDark = currentTheme === "dark";
+      const toggleBtn = $(this).find('[data-toggle="dark-mode"]');
+      if (toggleBtn.length > 0) {
+        const icon = toggleBtn.find("i");
+        if (icon.length > 0) {
+          icon[0].className = `bi ${isDark ? "bi-moon-fill" : "bi-sun-fill"}`;
+        }
+        toggleBtn.attr("aria-pressed", isDark ? "true" : "false");
+      }
+    }
   });
 });

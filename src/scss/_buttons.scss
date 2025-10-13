@@ -1,0 +1,100 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "bootstrap/scss/bootstrap" as bs;
+@use "sass:color";
+
+.btn-login {
+  @include btn-base;
+  @include button-gradient;
+  font-size: 1.2rem;
+}
+
+html[data-bs-theme="dark"] .btn-login,
+body.dark .btn-login {
+  @include button-gradient-dark;
+
+}
+
+@media (max-width: 420px) {
+  .btn-toggle {
+    padding: 0.15rem 0.25rem;
+    font-size: 1.1rem;
+  }
+}
+
+.btn-registrar-pago,
+.btn-registrar-horas {
+  @include btn-base;
+  @include button-gradient;
+  margin: 2rem 0 0 0;
+  font-size: 1rem;
+}
+
+html[data-bs-theme="dark"] .btn-registrar-pago,
+html[data-bs-theme="dark"] .btn-registrar-horas,
+body.dark .btn-registrar-pago,
+body.dark .btn-registrar-horas {
+  @include button-gradient-dark;
+  margin: 2rem 0 0 0;
+  font-size: 1rem;
+}
+
+.btn-guardar {
+  @include btn-base;
+  @include button-gradient;
+  font-size: 1rem;
+}
+
+html[data-bs-theme="dark"] .btn-guardar,
+body.dark .btn-guardar {
+  @include button-gradient-dark;
+  font-size: 1rem;
+}
+
+.btn-toggle {
+  background: none;
+  border: none;
+  color: vars.$text-color-primary;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.12s ease;
+
+  &:hover {
+    color: color.adjust(vars.$text-color-primary, $lightness: -12%);
+    border-radius: 50%;
+    transform: scale(1.05);
+  }
+
+  html[data-bs-theme="dark"] &,
+  body.dark & {
+    color: vars.$text-color-primary-dark;
+
+    &:hover {
+      color: color.adjust(vars.$text-color-primary-dark, $lightness: 10%);
+      border-radius: 50%;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.btn-toggle-sidebar {
+  background: none;
+  border: none;
+  color: vars.$text-color-secondary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: vars.$text-color-secondary;
+    color: vars.$bg-color-primary;
+    border-radius: 50%;
+    transform: scale(1.05);
+  }
+}

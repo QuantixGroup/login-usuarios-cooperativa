@@ -1,21 +1,33 @@
 @use "variables" as vars;
 @use "mixins" as *;
-@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+@use "bootstrap/scss/bootstrap" as bs;
 
 footer,
 p {
-    position:fixed;
+    position: fixed;
     bottom: 0;
     width: 100%;
     min-width: 140px;
     font-family: vars.$font-footer;
     color: vars.$text-color-primary;
-    
+
     span {
         min-width: 140px;
         font-weight: 600;
         font-size: 1.1rem;
         margin: 0;
         padding: 0;
+    }
+}
+
+html[data-bs-theme="dark"] footer,
+html[data-bs-theme="dark"] p {
+    background-color: vars.$bg-color-primary-dark;
+    color: vars.$text-color-primary-dark;
+
+    span {
+        color: vars.$text-color-primary-dark;
+        font-weight: 600;
+        font-size: 1.1rem;
     }
 }

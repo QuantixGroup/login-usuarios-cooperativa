@@ -7,6 +7,5 @@
     const y = container.querySelector("#current-year");
     if (y) y.textContent = new Date().getFullYear();
   } catch (err) {
-    console.error("Error cargando footer.html:", err);
   }
 })();

@@ -3,10 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
+
     <title>Panel del Socio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -22,7 +24,8 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <h5 class="card-title mb-0">Horas trabajadas</h5>
+                                    <h5 class="card-title mb-0"><i class="bi bi-clock-history me-2"
+                                            aria-hidden="true"></i>Horas trabajadas</h5>
                                     <button id="btn-ver-todas-horas" class="btn btn-sm btn-outline-primary ms-2">Ver
                                         todas</button>
                                 </div>
@@ -35,7 +38,8 @@
                     <div class="col-12 col-md-6">
                         <div class="card h-100">
                             <div class="card-body">
-                                <h5 class="card-title">Estado de Pago</h5>
+                                <h5 class="card-title"><i class="bi bi-wallet2 me-2" aria-hidden="true"></i>Estado de
+                                    Pagos</h5>
                                 <p class="card-text">
                                 </p>
                             </div>
@@ -43,10 +47,12 @@
                     </div>
                 </div>
 
-                <div class="row mt-3">
-                    <div class="col-12 d-flex justify-content-end gap-2">
-                        <button id="btn-abrir-registro-horas" class="btn btn-sm btn-primary">Registrar horas</button>
-                        <button id="btn-ver-recibos" class="btn btn-sm btn-secondary">Ver recibos</button>
+                <div class="row mb-4">
+                    <div class="col-12 col-md-6 d-flex justify-content-end">
+                        <button id="btn-abrir-registro-horas" class="btn-registrar-horas">Registrar horas</button>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex justify-content-end">
+                        <button id="btn-registrar-pago" class="btn-registrar-pago">Registrar Pago</button>
                     </div>
                 </div>
 
@@ -54,7 +60,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Próximas reuniones</h5>
+                                <h5 class="card-title"><i class="bi bi-calendar-event me-2"
+                                        aria-hidden="true"></i>Próximas reuniones</h5>
                                 <ul class="list-group list-group-flush" id="meetings">
                                 </ul>
                             </div>
@@ -65,8 +72,10 @@
         </div>
         <div id="footer" class="footer"></div>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dark-mode.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/env.js"></script>
     <script src="js/login.js"></script>
@@ -74,6 +83,7 @@
     <script src="js/modal-utils.js"></script>
     <script src="js/modal-ver-todas-horas.js"></script>
     <script src="js/modal-registro-horas.js"></script>
+    <script src="js/modal-registrar-pago.js"></script>
     <script src="js/modal-recibos-view.js"></script>
     <script src="js/footer.js"></script>
 </body>

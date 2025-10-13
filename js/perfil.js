@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
           data.situacion_laboral || "";
         document.getElementById("cantidadIntegrantes").value =
           data.cantidad_integrantes || "";
-        if (data.foto_url) {
+        if (data.foto_perfil) {
           var img = document.querySelector(".foto-img");
-          if (img) img.src = data.foto_url;
+          if (img) img.src = data.foto_perfil;
         }
       }
     })

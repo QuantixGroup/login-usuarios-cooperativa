@@ -1,0 +1,43 @@
+<div class="modal fade" id="modalVerRecibos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Recibos mensuales</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body" id="modalVerRecibosBody"></div>
+            <template id="pago-recibo-template">
+                <div class="mb-3">
+                    <label class="form-label">Recibo: <strong id="pago-recibo-label">-</strong></label>
+                </div>
+                <form id="form-subir-comprobante">
+                    <div class="mb-3">
+                        <label for="comprobante" class="form-label">Comprobante (PDF)</label>
+                        <input type="file" id="comprobante" name="comprobante" accept="application/pdf"
+                            class="form-control" required>
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-4">
+                            <label for="pago-dia" class="form-label">Día</label>
+                            <select id="pago-dia" name="dia" class="form-select" required></select>
+                        </div>
+                        <div class="col-4">
+                            <label for="pago-mes" class="form-label">Mes</label>
+                            <select id="pago-mes" name="mes" class="form-select" required></select>
+                        </div>
+                        <div class="col-4">
+                            <label for="pago-anio" class="form-label">Año</label>
+                            <select id="pago-anio" name="anio" class="form-select" required></select>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Subir y registrar pago</button>
+                        <button type="button" class="btn btn-secondary" id="btn-cancel-pago">Cancelar</button>
+                    </div>
+                </form>
+            </template>
+        </div>
+    </div>
+</div>

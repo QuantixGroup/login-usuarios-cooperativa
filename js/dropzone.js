@@ -1,181 +1,153 @@
-try {
-  document.addEventListener("DOMContentLoaded", function () {
-    if (window.Dropzone) {
-      Dropzone.autoDiscover = false;
-    } else {
-      console.warn("Dropzone no está disponible (window.Dropzone undefined)");
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.Dropzone) {
+    Dropzone.autoDiscover = false;
+  }
+
+  var dropzoneInstance = null;
+
+  function getAuthToken() {
+    var token =
+      sessionStorage.getItem("tokenAcceso") ||
+      sessionStorage.getItem("token") ||
+      localStorage.getItem("tokenAcceso") ||
+      localStorage.getItem("token");
+
+    return token;
+  }
+
+  function showAlert(type, message) {
+    var alert = document.createElement("div");
+    var alertClass =
+      "alert alert-" +
+      (type === "success" ? "success" : "danger") +
+      " alert-dismissible fade show";
+    alert.className = alertClass;
+    alert.style.cssText =
+      "position: fixed; top: 20px; right: 20px; z-index: 10000; min-width: 300px;";
+
+    var iconClass = type === "success" ? "check" : "xmark";
+    alert.innerHTML =
+      '<i class="fa-solid fa-' +
+      iconClass +
+      ' me-2"></i>' +
+      message +
+      '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
+
+    document.body.appendChild(alert);
+
+    setTimeout(function () {
+      alert.remove();
+    }, 3000);
+  }
+
+  function openDropzoneModal() {
+    var dropzoneEl = document.getElementById("fotoDropzone");
+    if (!dropzoneEl) return;
+
+    var backdrop = document.createElement("div");
+    backdrop.id = "dropzone-backdrop";
+    backdrop.style.cssText =
+      "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9998;";
+    document.body.appendChild(backdrop);
+
+    dropzoneEl.style.cssText =
+      "display: block; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); min-width: 400px;";
+
+    backdrop.onclick = function () {
+      closeDropzoneModal();
+    };
+  }
+
+  function closeDropzoneModal() {
+    var dropzoneEl = document.getElementById("fotoDropzone");
+    var backdrop = document.getElementById("dropzone-backdrop");
+
+    if (dropzoneEl) {
+      dropzoneEl.style.display = "none";
     }
-    var btnFoto = document.querySelector(".btn-foto");
-    var dropzoneFoto = document.getElementById("fotoDropzone");
-    function showAlert(type, message, timeoutMs) {
-      timeoutMs = timeoutMs || 4000;
-      var wrapper = document.createElement("div");
-      var baseClass =
-        type === "success" ? "alert alert-success" : "alert alert-danger";
-      wrapper.className =
-        baseClass +
-        " d-flex align-items-center shadow-lg p-3 fade show alert-" +
-        (type === "success" ? "exito" : "error");
-      wrapper.setAttribute("role", "alert");
-
-      var iconSpan = document.createElement("span");
-      iconSpan.className =
-        "d-flex align-items-center justify-content-center me-3";
-      var icon = document.createElement("i");
-      icon.className =
-        type === "success"
-          ? "fa-solid fa-check icon"
-          : "fa-solid fa-xmark icon";
-      iconSpan.appendChild(icon);
-
-      var textSpan = document.createElement("span");
-      textSpan.className =
-        "fw-semibold " +
-        (type === "success" ? "alert-exito-text" : "alert-error-text");
-      textSpan.textContent = message;
-
-      wrapper.appendChild(iconSpan);
-      wrapper.appendChild(textSpan);
-      document.body.appendChild(wrapper);
-
-      setTimeout(function () {
-        wrapper.classList.remove("show");
-        setTimeout(function () {
-          try {
-            wrapper.remove();
-          } catch (e) {}
-        }, 350);
-      }, timeoutMs);
+    if (backdrop) {
+      backdrop.remove();
     }
-    var dz = null;
-    if (btnFoto && dropzoneFoto) {
-      dropzoneFoto.style.display = "none";
+  }
 
-      function createBackdrop() {
-        var b = document.createElement("div");
-        b.id = "dzBackdrop";
-        Object.assign(b.style, {
-          position: "fixed",
-          inset: "0",
-          background: "rgba(0,0,0,0.45)",
-          zIndex: 9998,
-        });
-        return b;
+  document.addEventListener("click", function (e) {
+    if (
+      e.target.matches(".btn-foto-perfil") ||
+      e.target.closest(".btn-foto-perfil")
+    ) {
+      e.preventDefault();
+
+      var dropzoneEl = document.getElementById("fotoDropzone");
+      if (!dropzoneEl) {
+        return;
       }
 
-      function openModal() {
-        var existing = document.getElementById("dzBackdrop");
-        if (!existing) document.body.appendChild(createBackdrop());
+      openDropzoneModal();
 
-        dropzoneFoto._prevStyles = {
-          display: dropzoneFoto.style.display || "",
-          position: dropzoneFoto.style.position || "",
-          left: dropzoneFoto.style.left || "",
-          top: dropzoneFoto.style.top || "",
-          transform: dropzoneFoto.style.transform || "",
-          zIndex: dropzoneFoto.style.zIndex || "",
-        };
-        Object.assign(dropzoneFoto.style, {
-          display: "block",
-          position: "fixed",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 9999,
-          minWidth: "340px",
-        });
+      var authToken = getAuthToken();
+      if (!authToken) {
+        showAlert(
+          "error",
+          "No se encontró token de autorización. Inicia sesión nuevamente."
+        );
+        closeDropzoneModal();
+        return;
       }
 
-      function closeModal() {
-        var b = document.getElementById("dzBackdrop");
-        if (b) b.remove();
-        if (dropzoneFoto._prevStyles) {
-          Object.assign(dropzoneFoto.style, dropzoneFoto._prevStyles);
-          delete dropzoneFoto._prevStyles;
-        }
-        dropzoneFoto.style.display = "none";
+      if (dropzoneEl.dropzone) {
+        dropzoneEl.dropzone.destroy();
+        dropzoneInstance = null;
       }
 
-      document.addEventListener("click", function (e) {
-        var b = document.getElementById("dzBackdrop");
-        if (b && e.target === b) closeModal();
-      });
+      if (!dropzoneInstance) {
+        try {
+          dropzoneInstance = new Dropzone(dropzoneEl, {
+            url: "http://localhost:8000/api/perfil/foto",
+            paramName: "foto",
+            maxFiles: 1,
+            acceptedFiles: "image/*",
+            addRemoveLinks: true,
+            dictDefaultMessage:
+              "Arrastra una imagen aquí o haz click para seleccionar",
+            dictRemoveFile: "Eliminar",
+            headers: {
+              Authorization: "Bearer " + authToken,
+            },
+            success: function (file, response) {
+              if (response && response.url_foto) {
+                var profileImg = document.querySelector(".foto-img");
+                if (profileImg) {
+                  profileImg.src = response.url_foto;
+                }
 
-      document.addEventListener("click", function (e) {
-        var btn = e.target.closest && e.target.closest(".btn-foto");
-        if (!btn) return;
-        dropzoneFoto = document.getElementById("fotoDropzone");
-        if (!dropzoneFoto) {
-          console.warn(
-            "dropzone.js: no se encontró #fotoDropzone al abrir modal"
-          );
+                try {
+                  sessionStorage.setItem("fotoPerfilUrl", response.url_foto);
+                } catch (e) {}
+              }
+
+              showAlert("success", "Foto subida correctamente");
+              setTimeout(closeDropzoneModal, 1500);
+            },
+            error: function (file, errorMessage) {
+              showAlert("error", "Error al subir la foto. Intenta de nuevo.");
+            },
+            removedfile: function (file) {
+              file.previewElement.remove();
+            },
+          });
+        } catch (error) {
+          showAlert("error", "Error al inicializar el sistema de carga");
           return;
         }
-        openModal();
-        if (!dz) {
-          try {
-            dz = new Dropzone(dropzoneFoto, {
-              url: "http://localhost:8000/api/perfil/foto",
-              paramName: "foto",
-              maxFiles: 1,
-              acceptedFiles: "image/*",
-              headers: {
-                Authorization:
-                  "Bearer " + sessionStorage.getItem("tokenAcceso"),
-              },
-              clickable: true,
-              init: function () {
-                try {
-                  if (this.hiddenFileInput) this.hiddenFileInput.click();
-                  else {
-                    var input =
-                      dropzoneFoto.querySelector("input[type='file']");
-                    if (input) input.click();
-                  }
-                } catch (err) {
-                  console.warn(
-                    "No se pudo abrir el selector automáticamente",
-                    err
-                  );
-                }
-              },
-              success: function (file, response) {
-                if (response && response.url_foto) {
-                  var img = document.querySelector(".foto-img");
-                  if (img) img.src = response.url_foto;
-                  try {
-                    sessionStorage.setItem("fotoPerfilUrl", response.url_foto);
-                  } catch (e) {}
-                }
-                showAlert("success", "Foto subida correctamente");
-                closeModal();
-              },
-              error: function (file, response) {
-                showAlert("error", "Error al subir la foto");
-              },
-              autoProcessQueue: true,
-            });
-          } catch (initErr) {
-            console.error(
-              "dropzone.js: fallo al inicializar Dropzone",
-              initErr
-            );
-            return;
+      }
+
+      setTimeout(function () {
+        try {
+          if (dropzoneInstance.hiddenFileInput) {
+            dropzoneInstance.hiddenFileInput.click();
           }
-        } else {
-          try {
-            if (dz.hiddenFileInput) dz.hiddenFileInput.click();
-            else {
-              var input = dropzoneFoto.querySelector("input[type='file']");
-              if (input) input.click();
-            }
-          } catch (err) {
-            console.warn("No se pudo abrir el selector automáticamente", err);
-          }
-        }
-      });
+        } catch (error) {}
+      }, 100);
     }
   });
-} catch (e) {
-  console.error("Error en dropzone.js:", e);
-}
+});

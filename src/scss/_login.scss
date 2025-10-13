@@ -1,6 +1,6 @@
 @use "variables" as vars;
 @use "mixins" as *;
-@use "../../node_modules/bootstrap/scss/bootstrap" as bs;
+@use "bootstrap/scss/bootstrap" as bs;
 
 .body-background {
     background-image: url('../src/img/fondoContruccion.avif');
@@ -19,16 +19,34 @@ header h1 {
     color: vars.$text-color-secondary;
     font-size: 3rem;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    transition: color 0.3s ease;
 
     @include bs.media-breakpoint-down(sm) {
         font-size: 2rem;
     }
 }
 
-.card-body,
-.label {
+.card-body {
+    background-color: vars.$bg-color-secondary;
+
+    html[data-bs-theme="dark"] & {
+        background-color: vars.$bg-color-secondary-dark;
+    }
+}
+
+.form-label {
     font-family: vars.$font-subtitle;
     color: vars.$text-color-primary;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    -webkit-transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    -ms-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
+
+    html[data-bs-theme="dark"] & {
+        color: vars.$text-color-primary-dark;
+    }
 }
 
 .input-group-text {

@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const FORM_URL = "modals/registro-horas.html";
-
   function apiBase() {
     return (
       (typeof API_COOPERATIVA !== "undefined" && API_COOPERATIVA) ||
@@ -85,24 +83,13 @@ document.addEventListener("DOMContentLoaded", function () {
       (t.id === "btn-abrir-registro-horas" ||
         (t.closest && t.closest("#btn-abrir-registro-horas")))
     ) {
-      const { modalEl, modalBody, bs } = await ensureModalFragment(
-        "modals/modal-registro-horas.html",
-        "modalRegistroHoras",
-        "modalRegistroHorasBody",
-        `
-        <div class="modal fade" id="modalRegistroHoras" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Registrar Horas</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div><div class="modal-body" id="modalRegistroHorasBody"></div></div></div></div>`
-      );
+      const modalEl = document.getElementById("modalRegistroHoras");
+      const modalBody = document.getElementById("modalRegistroHorasBody");
+      const bs =
+        bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
 
-      if (!modalBody || !bs) return;
-
-      try {
-        const r = await fetch(FORM_URL);
-        if (!r.ok) throw new Error("No se pudo cargar el formulario");
-        const html = await r.text();
-        modalBody.innerHTML = html;
-      } catch (err) {
-        modalBody.innerHTML =
-          '<p class="text-danger">No se pudo cargar el formulario de registro.</p>';
+      if (!modalBody || !bs) {
+        return;
       }
 
       const form = modalBody.querySelector("#form-registro-horas");
@@ -148,6 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
           e.preventDefault();
           const fecha = form.querySelector("#fecha").value;
           const horas = parseFloat(form.querySelector("#horas").value || 0);
+          const tipoTrabajo = form.querySelector("#tipo_trabajo").value;
+
           if (!fecha) {
             showAlert("error", "Seleccione una fecha");
             return;
@@ -160,6 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
           }
           if (!(horas > 0)) {
             showAlert("error", "Ingrese la cantidad de horas (mayor a 0)");
+            return;
+          }
+          if (!tipoTrabajo) {
+            showAlert("error", "Seleccione el tipo de trabajo");
             return;
           }
           const fd = new FormData(form);
@@ -225,10 +218,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       showAlert("success", json.message || "Horas registradas");
-      bsModal.hide();
+      try {
+        const modalNode = document.getElementById("modalRegistroHoras");
+        const bsInst = modalNode && bootstrap.Modal.getInstance(modalNode);
+        if (bsInst) bsInst.hide();
+      } catch (e) {}
       if (window.loadHorasResumen) window.loadHorasResumen();
     } catch (err) {
-      console.error(err);
       showAlert("error", "Error al guardar: " + (err.message || err));
     } finally {
       submitBtn.disabled = false;
@@ -236,97 +232,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  if (btn) {
-    btn.addEventListener("click", function () {
-      fetch(FORM_URL)
-        .then((r) => {
-          if (!r.ok) throw new Error("No se pudo cargar el formulario");
-          return r.text();
-        })
-        .then((html) => {
-          modalBody.innerHTML = html;
-          initFormLogic();
-        })
-        .catch((err) => {
-          console.error(err);
-          modalBody.innerHTML =
-            '<p class="text-danger">No se pudo cargar el formulario de registro.</p>';
-        });
-
-      function initFormLogic() {
-        const form = modalBody.querySelector("#form-registro-horas");
-        const submitBtn = form.querySelector('button[type="submit"]');
-
-        try {
-          const dateInput = form.querySelector("#fecha");
-          if (dateInput) {
-            const d = new Date();
-            d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
-            dateInput.value = d.toISOString().split("T")[0];
-          }
-          const hoursInput = form.querySelector("#horas");
-          if (hoursInput) {
-            hoursInput.value = "0";
-            let feedback = form.querySelector(".horas-feedback");
-            if (!feedback) {
-              feedback = document.createElement("div");
-              feedback.className = "invalid-feedback horas-feedback";
-              feedback.textContent = "Ingrese un valor mayor que 0";
-              hoursInput.insertAdjacentElement("afterend", feedback);
-            }
-
-            const validateHours = () => {
-              const v = parseFloat(hoursInput.value || "0");
-              if (!(v > 0)) {
-                hoursInput.classList.add("is-invalid");
-                if (submitBtn) submitBtn.disabled = true;
-              } else {
-                hoursInput.classList.remove("is-invalid");
-                if (submitBtn) submitBtn.disabled = false;
-              }
-            };
-
-            hoursInput.addEventListener("input", validateHours);
-            validateHours();
-          }
-        } catch (e) {}
-
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const fecha = form.querySelector("#fecha").value;
-          const horas = parseFloat(form.querySelector("#horas").value || 0);
-          if (!fecha) {
-            showAlert("error", "Seleccione una fecha");
-            return;
-          }
-          const hoy = new Date();
-          const f = new Date(fecha + "T00:00:00");
-          if (f > hoy) {
-            showAlert("error", "La fecha no puede ser mayor al día de hoy");
-            return;
-          }
-          if (!(horas > 0)) {
-            showAlert("error", "Ingrese la cantidad de horas (mayor a 0)");
-            return;
-          }
-
-          const fd = new FormData(form);
-          submitForm(fd, submitBtn);
-        });
-
-        bsModal.show();
-      }
-    });
-  }
-
-  modalEl.addEventListener("shown.bs.modal", function () {
+  document.addEventListener("shown.bs.modal", function (ev) {
     try {
-      const form = modalBody.querySelector("#form-registro-horas");
+      const target = ev && ev.target;
+      if (!target || target.id !== "modalRegistroHoras") return;
+      const form = target.querySelector("#form-registro-horas");
       if (!form) return;
       const hoursInput = form.querySelector("#horas");
       if (hoursInput) {
         hoursInput.focus();
-        hoursInput.select && hoursInput.select();
+        if (hoursInput.select) hoursInput.select();
       }
     } catch (e) {}
   });
