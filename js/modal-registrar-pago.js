@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
       sessionStorage.getItem("token") ||
       sessionStorage.getItem("tokenAcceso") ||
       "";
-    const url = apiBase() + "/recibos/comprobar";
+    const url = apiBase() + "/comprobantes";
 
     btn.disabled = true;
     btn.innerHTML =
@@ -50,10 +50,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const json = await res.json().catch(() => ({}));
 
       if (res.ok) {
-        showAlert(
-          "success",
-          json.message || "Recibo actualizado correctamente"
-        );
+        showAlert("success", json.message || "Recibo registrado correctamente");
+
+        try {
+          const modalNode = document.getElementById("modalVerRecibos");
+          const bsInst = modalNode && bootstrap.Modal.getInstance(modalNode);
+          if (bsInst) bsInst.hide();
+        } catch (e) {}
       } else {
         throw new Error(json.message || res.statusText);
       }
@@ -140,6 +143,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const fileInput = form.querySelector("#comprobante");
             const file = fileInput.files[0];
             const submitBtn = form.querySelector('button[type="submit"]');
+            const diaSelect = form.querySelector("#pago-dia");
+            const mesSelect = form.querySelector("#pago-mes");
+            const anioSelect = form.querySelector("#pago-anio");
 
             if (!monto || monto <= 0) {
               showAlert("error", "Ingrese un monto válido mayor a 0");
@@ -158,7 +164,18 @@ document.addEventListener("DOMContentLoaded", function () {
               return;
             }
 
-            const fd = new FormData(form);
+            const dia = diaSelect.value;
+            const mes = mesSelect.value;
+            const anio = anioSelect.value;
+            const fechaComprobante = `${anio}-${mes}-${dia}`;
+
+            const fd = new FormData();
+            fd.append("monto", monto);
+            fd.append("fecha_comprobante", fechaComprobante);
+            fd.append("archivo", file);
+            fd.append("mes", parseInt(mes));
+            fd.append("anio", parseInt(anio));
+
             submitForm(fd, submitBtn);
           });
         }

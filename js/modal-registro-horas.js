@@ -51,7 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(() => alert(text));
   }
 
+  let isSubmitting = false;
+
   async function submitForm(fd, submitBtn) {
+    if (isSubmitting) {
+      return;
+    }
+
+    isSubmitting = true;
     const originalText = submitBtn ? submitBtn.innerHTML : "Guardar";
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -112,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
       }
+      isSubmitting = false;
     }
   }
 

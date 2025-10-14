@@ -1,7 +1,6 @@
 $(document).ready(function () {
   const token = sessionStorage.getItem("tokenAcceso");
   if (!token) {
-    alert("Debes iniciar sesión primero");
     window.location.href = "login.html";
     return;
   }
@@ -26,7 +25,8 @@ $(document).ready(function () {
       }
     },
     error: function () {
-      alert("Error al cargar perfil");
+      sessionStorage.clear();
+      window.location.href = "login.html";
     },
   });
 
@@ -241,5 +241,4 @@ $(document).ready(function () {
       }
     } catch (e) {}
   };
-
 });
