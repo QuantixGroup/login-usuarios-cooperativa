@@ -1,11 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-  try {
-    var fotoUrlSession = sessionStorage.getItem("fotoPerfilUrl");
-    if (fotoUrlSession) {
-      var imgSess = document.querySelector(".foto-img");
-      if (imgSess) imgSess.src = fotoUrlSession;
-    }
-  } catch (e) {}
+  function resolveImageUrl(path) {
+    if (!path) return path;
+    if (/^https?:\/\//i.test(path)) return path;
+    try {
+      if (typeof API_USUARIOS !== "undefined" && API_USUARIOS) {
+        return (
+          API_USUARIOS.replace(/\/api\/?$/, "") + "/" + path.replace(/^\//, "")
+        );
+      }
+    } catch (e) {}
+    return window.location.origin + "/" + path.replace(/^\//, "");
+  }
+
+  function addCacheBuster(url) {
+    if (!url) return url;
+    return url + (url.includes("?") ? "&" : "?") + "v=" + Date.now();
+  }
   fetch("http://localhost:8000/api/perfil", {
     method: "GET",
     headers: {
@@ -33,9 +43,31 @@ document.addEventListener("DOMContentLoaded", function () {
           data.situacion_laboral || "";
         document.getElementById("cantidadIntegrantes").value =
           data.cantidad_integrantes || "";
+        var img =
+          document.querySelector(".perfil-form .foto-img") ||
+          document.querySelector(".foto-img");
         if (data.foto_perfil) {
-          var img = document.querySelector(".foto-img");
-          if (img) img.src = data.foto_perfil;
+          if (img) {
+            var resolved = resolveImageUrl(data.foto_perfil);
+            var withV = addCacheBuster(resolved);
+            img.src = withV;
+            try {
+              if (data.cedula) {
+                sessionStorage.setItem("fotoPerfilUrl_" + data.cedula, withV);
+              } else {
+                sessionStorage.setItem("fotoPerfilUrl", withV);
+              }
+            } catch (e) {}
+          }
+        } else {
+          if (img) {
+            img.src = "src/img/user-placeholder.png";
+          }
+          try {
+            if (data && data.cedula) {
+              sessionStorage.removeItem("fotoPerfilUrl_" + data.cedula);
+            }
+          } catch (e) {}
         }
       }
     })
@@ -98,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function mostrarMensajeAlerta(tipo) {
+function mostrarMensajeAlerta(tipo, mensaje) {
   fetch("msj-alertas.html")
     .then((response) => response.text())
     .then((html) => {
@@ -107,8 +139,16 @@ function mostrarMensajeAlerta(tipo) {
       let msg;
       if (tipo === "exito") {
         msg = temp.querySelector(".alert-success");
+        if (mensaje) {
+          const span = msg.querySelector(".alert-exito-text");
+          if (span) span.textContent = mensaje;
+        }
       } else {
         msg = temp.querySelector(".alert-danger");
+        if (mensaje) {
+          const span = msg.querySelector(".alert-error-text");
+          if (span) span.textContent = mensaje;
+        }
       }
       document.body.appendChild(msg);
       setTimeout(() => {

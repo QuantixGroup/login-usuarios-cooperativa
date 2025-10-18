@@ -15,7 +15,33 @@ document.addEventListener("DOMContentLoaded", function () {
     return token;
   }
 
-  function showAlert(type, message) {
+  function resolveImageUrl(path) {
+    if (!path) return path;
+    if (/^https?:\/\//i.test(path)) return path;
+    try {
+      if (typeof API_USUARIOS !== "undefined" && API_USUARIOS) {
+        return (
+          API_USUARIOS.replace(/\/api\/?$/, "") + "/" + path.replace(/^\//, "")
+        );
+      }
+    } catch (e) {}
+    return window.location.origin + "/" + path.replace(/^\//, "");
+  }
+
+  function addCacheBuster(url) {
+    if (!url) return url;
+    return url + (url.includes("?") ? "&" : "?") + "v=" + Date.now();
+  }
+
+  function safeMostrarMensaje(type, message) {
+    try {
+      if (typeof mostrarMensajeAlerta === "function") {
+        var tipo = type === "success" ? "exito" : "error";
+        mostrarMensajeAlerta(tipo, message);
+        return;
+      }
+    } catch (e) {}
+
     var alert = document.createElement("div");
     var alertClass =
       "alert alert-" +
@@ -24,17 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
     alert.className = alertClass;
     alert.style.cssText =
       "position: fixed; top: 20px; right: 20px; z-index: 10000; min-width: 300px;";
-
-    var iconClass = type === "success" ? "check" : "xmark";
-    alert.innerHTML =
-      '<i class="fa-solid fa-' +
-      iconClass +
-      ' me-2"></i>' +
-      message +
-      '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
-
+    alert.innerText =
+      message ||
+      (type === "success" ? "Operación exitosa" : "Ocurrió un error");
     document.body.appendChild(alert);
-
     setTimeout(function () {
       alert.remove();
     }, 3000);
@@ -114,22 +133,48 @@ document.addEventListener("DOMContentLoaded", function () {
               Authorization: "Bearer " + authToken,
             },
             success: function (file, response) {
-              if (response && response.url_foto) {
-                var profileImg = document.querySelector(".foto-img");
-                if (profileImg) {
-                  profileImg.src = response.url_foto;
+              var imageUrl = null;
+              if (response) {
+                imageUrl =
+                  response.foto_perfil ||
+                  response.url_foto ||
+                  (response.data &&
+                    (response.data.foto_perfil || response.data.url_foto));
+              }
+
+              if (imageUrl) {
+                var resolved = resolveImageUrl(imageUrl);
+                var withV = addCacheBuster(resolved);
+                var fotoElem =
+                  document.querySelector(".perfil-form .foto-img") ||
+                  document.querySelector(".foto-img");
+                if (fotoElem) {
+                  fotoElem.src = withV;
                 }
 
                 try {
-                  sessionStorage.setItem("fotoPerfilUrl", response.url_foto);
+                  var cedula = document.getElementById("documento")
+                    ? document.getElementById("documento").value
+                    : null;
+                  if (cedula) {
+                    sessionStorage.setItem("fotoPerfilUrl_" + cedula, withV);
+                  } else {
+                    sessionStorage.setItem("fotoPerfilUrl", withV);
+                  }
                 } catch (e) {}
               }
 
-              showAlert("success", "Foto subida correctamente");
+              safeMostrarMensaje(
+                "success",
+                "Imagen de perfil actualizado correctamente"
+              );
               setTimeout(closeDropzoneModal, 1500);
             },
             error: function (file, errorMessage) {
-              showAlert("error", "Error al subir la foto. Intenta de nuevo.");
+              safeMostrarMensaje(
+                "error",
+                "Error al subir la foto. Intenta de nuevo."
+              );
             },
             removedfile: function (file) {
               file.previewElement.remove();

@@ -47,10 +47,22 @@ $(document).ready(function () {
         direccion: $("#direccion").val(),
       },
       success: function () {
-        alert("Perfil actualizado correctamente");
+        try {
+          if (typeof mostrarMensajeAlerta === "function")
+            mostrarMensajeAlerta("exito", "Perfil actualizado correctamente");
+          else alert("Perfil actualizado correctamente");
+        } catch (e) {
+          alert("Perfil actualizado correctamente");
+        }
       },
       error: function () {
-        alert("Error al actualizar perfil");
+        try {
+          if (typeof mostrarMensajeAlerta === "function")
+            mostrarMensajeAlerta("error", "Error al actualizar perfil");
+          else alert("Error al actualizar perfil");
+        } catch (e) {
+          alert("Error al actualizar perfil");
+        }
       },
     });
   });
@@ -71,10 +83,22 @@ $(document).ready(function () {
         contrasena_nueva_confirmation: $("#confirmar").val(),
       },
       success: function () {
-        alert("Contraseña cambiada con éxito");
+        try {
+          if (typeof mostrarMensajeAlerta === "function")
+            mostrarMensajeAlerta("exito", "Contraseña cambiada con éxito");
+          else alert("Contraseña cambiada con éxito");
+        } catch (e) {
+          alert("Contraseña cambiada con éxito");
+        }
       },
       error: function () {
-        alert("Error al cambiar la contraseña");
+        try {
+          if (typeof mostrarMensajeAlerta === "function")
+            mostrarMensajeAlerta("error", "Error al cambiar la contraseña");
+          else alert("Error al cambiar la contraseña");
+        } catch (e) {
+          alert("Error al cambiar la contraseña");
+        }
       },
     });
   });
@@ -98,10 +122,22 @@ $(document).ready(function () {
         descripcion: $("#motivo").val(),
       }),
       success: function () {
-        alert("Horas registradas correctamente");
+        try {
+          if (typeof mostrarMensajeAlerta === "function")
+            mostrarMensajeAlerta("exito", "Horas registradas correctamente");
+          else alert("Horas registradas correctamente");
+        } catch (e) {
+          alert("Horas registradas correctamente");
+        }
       },
       error: function () {
-        alert("Error al registrar horas");
+        try {
+          if (typeof mostrarMensajeAlerta === "function")
+            mostrarMensajeAlerta("error", "Error al registrar horas");
+          else alert("Error al registrar horas");
+        } catch (e) {
+          alert("Error al registrar horas");
+        }
       },
     });
   });
@@ -117,10 +153,22 @@ $(document).ready(function () {
       contentType: false,
       data: formData,
       success: function () {
-        alert("Comprobante subido con éxito");
+        try {
+          if (typeof mostrarMensajeAlerta === "function")
+            mostrarMensajeAlerta("exito", "Comprobante subido con éxito");
+          else alert("Comprobante subido con éxito");
+        } catch (e) {
+          alert("Comprobante subido con éxito");
+        }
       },
       error: function () {
-        alert("Error al subir comprobante");
+        try {
+          if (typeof mostrarMensajeAlerta === "function")
+            mostrarMensajeAlerta("error", "Error al subir comprobante");
+          else alert("Error al subir comprobante");
+        } catch (e) {
+          alert("Error al subir comprobante");
+        }
       },
     });
   });
@@ -136,6 +184,16 @@ $(document).ready(function () {
       },
       complete: function () {
         sessionStorage.removeItem("tokenAcceso");
+        try {
+          Object.keys(sessionStorage).forEach(function (k) {
+            if (
+              k &&
+              (k === "fotoPerfilUrl" || k.indexOf("fotoPerfilUrl_") === 0)
+            ) {
+              sessionStorage.removeItem(k);
+            }
+          });
+        } catch (e) {}
         window.location.href = "login.html";
       },
     });

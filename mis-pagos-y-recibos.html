@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Pagos y Recibos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div id="sidebar" class="sidebar"></div>
+    <div id="main-content" class="main-content">
+        <h1 class="text-center">Mis Pagos y Recibos</h1>
+        <div class="pagos-container">
+            <div class="pagos-card">
+                <div class="pagos-inner">
+                    <div class="mb-3 d-flex justify-content-start">
+                        <input id="buscador-mes" class="form-control form-control-sm me-3 mb-1"
+                            placeholder="Buscar por mes" type="search" />
+                    </div>
+                    <div class="table-responsive">
+                        <table id="pagos-table" class="table table-bordered table-hover align-middle text-center">
+                            <thead>
+                                <tr>
+                                    <th>Numero de Recibo</th>
+                                    <th>Monto</th>
+                                    <th>Mes</th>
+                                    <th>Año</th>
+                                    <th>Estado de Pago</th>
+                                    <th>Observación</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pagos-tbody"></tbody>
+                            <template id="pagos-template">
+                                <tr>
+                                    <td class="td-id"></td>
+                                    <td class="td-monto"></td>
+                                    <td class="td-mes"></td>
+                                    <td class="td-anio"></td>
+                                    <td class="td-estado"><span class="estado-badge badge">Estado</span></td>
+                                    <td class="td-observacion"></td>
+                                    <td class="td-acciones"><button class="btn-ver-recibo btn btn-sm">Abrir</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" class="footer"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/pagos-y-recibos.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/footer.js"></script>
+</body>
+
+</html>

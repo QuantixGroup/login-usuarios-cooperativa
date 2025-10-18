@@ -28,6 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showAlert(type, text) {
+    try {
+      if (typeof mostrarMensajeAlerta === "function") {
+        mostrarMensajeAlerta(type === "success" ? "exito" : "error", text);
+        return;
+      }
+    } catch (e) {}
+
     fetch("msj-alertas.html")
       .then((r) => r.text())
       .then((html) => {
