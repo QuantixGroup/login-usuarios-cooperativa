@@ -5,6 +5,12 @@ $(document).ready(function () {
     return;
   }
 
+  const esPrimerInicio = sessionStorage.getItem("primerInicio") === "true";
+  if (esPrimerInicio) {
+    window.location.href = "cambiar-password.html";
+    return;
+  }
+
   $.ajax({
     url: API_USUARIOS + "/perfil",
     type: "GET",

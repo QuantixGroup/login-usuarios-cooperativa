@@ -24,7 +24,8 @@ body.dark .btn-login {
 
 .btn-registrar-pago,
 .btn-registrar-horas,
-.btn-ver-horas {
+.btn-ver-horas,
+.btn-cambiar-password {
   @include btn-base;
   @include button-gradient;
   margin: 2rem 0 0 0;
@@ -34,9 +35,11 @@ body.dark .btn-login {
 html[data-bs-theme="dark"] .btn-registrar-pago,
 html[data-bs-theme="dark"] .btn-registrar-horas,
 html[data-bs-theme="dark"] .btn-ver-horas,
+html[data-bs-theme="dark"] .btn-cambiar-password,
 body.dark .btn-registrar-pago,
 body.dark .btn-registrar-horas,
-body.dark .btn-ver-horas {
+body.dark .btn-ver-horas,
+body.dark .btn-cambiar-password {
   @include button-gradient-dark;
   margin: 2rem 0 0 0;
   font-size: 1rem;
