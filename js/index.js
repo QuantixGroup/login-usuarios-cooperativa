@@ -29,6 +29,10 @@ $(document).ready(function () {
       if (nombreCompleto) {
         $("#user-nombre").text(nombreCompleto);
       }
+
+      try {
+        if (typeof renderMeetings === "function") renderMeetings();
+      } catch (e) {}
     },
     error: function () {
       sessionStorage.clear();
@@ -305,4 +309,157 @@ $(document).ready(function () {
       }
     } catch (e) {}
   };
+
+  function renderMeetings() {
+    const meetings = [
+      {
+        title: "Asamblea General",
+        date: "2025-11-14",
+        time: "18:00",
+        location: "Sede Central - Salón Principal",
+        agenda: ["Informe de gestión", "Aprobación de estados financieros"],
+      },
+      {
+        title: "Taller: Buenas Prácticas Cooperativas",
+        date: "2025-12-01",
+        time: "16:00",
+        location: "Aula 3 - Centro Comunitario",
+        agenda: ["Responsabilidades del socio", "Gestión participativa"],
+      },
+      {
+        title: "Reunión Consejo Directivo y IAT",
+        date: "2025-10-28",
+        time: "19:30 – 21:00",
+        location: "Sede Central - Sala de reuniones",
+        agenda: [
+          "Seguimiento del avance de la construcción",
+          "Revisión del presupuesto de obra",
+        ],
+      },
+      {
+        title: "Taller de Rendición de Cuentas",
+        date: "2025-11-05",
+        time: "18:00 – 20:00",
+        location: "Aula Magna - Centro Comunitario",
+        agenda: [
+          "Sesión informativa sobre la gestión de cuotas de amortización",
+          "Presupuesto anual",
+        ],
+      },
+      {
+        title: "Debate: Derecho de Uso y Goce",
+        date: "2025-11-12",
+        time: "17:30 – 19:30",
+        location: "Centro Cultural - Sala 1",
+        agenda: [
+          "Debates sobre el derecho de uso y goce de la vivienda",
+          "Casos y experiencias en cooperativas de ayuda mutua",
+        ],
+      },
+      {
+        title: "Seminario: Financiamiento y Cupos",
+        date: "2025-11-19",
+        time: "10:00 – 12:00",
+        location: "Salón de Actos - Centro Comunitario",
+        agenda: [
+          "Financiamiento y subsidios de permanencia",
+          "Discusión sobre el llenado de cupos libres en cooperativas",
+        ],
+      },
+    ];
+
+    const $list = $("#meetings");
+    if (!$list.length) return;
+    $list.empty();
+
+    meetings.forEach((m) => {
+      const _d = new Date(m.date + "T00:00:00");
+      const weekday = new Intl.DateTimeFormat("es-ES", { weekday: "short" })
+        .format(_d)
+        .replace(/\./g, "");
+      const day = String(_d.getDate()).padStart(2, "0");
+      const month = new Intl.DateTimeFormat("es-ES", { month: "short" })
+        .format(_d)
+        .replace(/\./g, "");
+      const year = _d.getFullYear();
+      const dateLabel = `${weekday}, ${day} ${month} ${year}`;
+
+      const shortAgenda = m.agenda.slice(0, 2).map(escapeHtml).join(" • ");
+
+      const $item = $(
+        `<li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+              <div class="fw-bold">${escapeHtml(m.title)}</div>
+              <div class="small text-muted">${dateLabel} • ${escapeHtml(
+          m.time
+        )} — ${escapeHtml(m.location)}</div>
+              <div class="mt-1 small">${shortAgenda}</div>
+            </div>
+            <div class="text-end">
+              <button class="btn btn-sm btn-outline-primary btn-meeting-details" data-title="${escapeHtml(
+                m.title
+              )}">Ver detalles</button>
+            </div>
+          </li>`
+      );
+
+      $list.append($item);
+    });
+
+    $(document)
+      .off("click", ".btn-meeting-details")
+      .on("click", ".btn-meeting-details", function () {
+        const title = $(this).data("title");
+        const meeting = meetings.find((x) => x.title === title);
+        if (!meeting) return;
+
+        const agendaHtml = meeting.agenda
+          .map((a) => `<li>${escapeHtml(a)}</li>`)
+          .join("");
+        const html = `
+          <div><strong>${escapeHtml(meeting.title)}</strong></div>
+          <div class="small text-muted">${escapeHtml(
+            meeting.date
+          )} • ${escapeHtml(meeting.time)} — ${escapeHtml(
+          meeting.location
+        )}</div>
+          <div class="mt-2"><strong>Agenda:</strong><ul>${agendaHtml}</ul></div>
+        `;
+
+        if (typeof bootstrap !== "undefined") {
+          const modalEl =
+            document.getElementById("meetingDetailsModal") ||
+            document.getElementById("_meetingDetailsModal");
+          if (modalEl) {
+            const titleEl = modalEl.querySelector(".modal-title");
+            const bodyEl = modalEl.querySelector(".modal-body");
+            if (titleEl) titleEl.textContent = meeting.title;
+            if (bodyEl) bodyEl.innerHTML = html;
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+          } else {
+            alert(
+              `${escapeHtml(meeting.title)}\n\nAgenda:\n- ${meeting.agenda
+                .map((a) => escapeHtml(a))
+                .join("\n- ")}`
+            );
+          }
+        } else {
+          alert(
+            `${escapeHtml(meeting.title)}\n\nAgenda:\n- ${meeting.agenda
+              .map((a) => escapeHtml(a))
+              .join("\n- ")}`
+          );
+        }
+      });
+  }
+
+  function escapeHtml(unsafe) {
+    return String(unsafe)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 });

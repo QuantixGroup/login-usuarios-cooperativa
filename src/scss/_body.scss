@@ -1,19 +1,45 @@
 @use "variables" as vars;
 @use "mixins" as *;
 
-html,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: var(--bg-tertiary, vars.$bg-color-tertiary);
     color: var(--text-primary, vars.$text-color-primary);
-    height: 100%;
     min-height: 100vh;
+    height: 100%;
     transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 
-    html[data-bs-theme="dark"] &,
-    body.dark & {
-        background-color: vars.$bg-color-primary-dark;
-        color: vars.$text-color-primary-dark;
-    }
+}
+
+html[data-bs-theme="dark"] body,
+body.dark {
+    background-color: vars.$bg-color-primary-dark;
+    color: vars.$text-color-primary-dark;
+}
+
+.container-fluid {
+    background-color: vars.$bg-color-tertiary;
+}
+
+html[data-bs-theme="dark"] .container-fluid,
+body.dark .container-fluid {
+    background-color: vars.$bg-color-primary-dark;
+}
+
+#page-wrap {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .app-container {
@@ -27,7 +53,7 @@ body {
     transition: color 0.3s ease;
 }
 
-.container {
+.app-container .container {
     display: flex;
     min-height: 100vh;
 }
@@ -40,7 +66,10 @@ body {
 
 .main-content {
     margin-left: 17.1875rem;
+    flex: 1 0 auto;
+    padding-bottom: 2rem;
 }
+
 
 .main-content h1 {
     font-family: vars.$font-subtitle;
@@ -53,4 +82,9 @@ body {
     body.dark & {
         color: vars.$text-color-primary-dark;
     }
+}
+
+body:not([data-bs-theme="dark"]):not(.dark) .card {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
 }

@@ -3,13 +3,20 @@
 @use "bootstrap/scss/bootstrap" as bs;
 
 footer,
-p {
-    position: fixed;
-    bottom: 0;
+.footer {
+    flex-shrink: 0;
     width: 100%;
     min-width: 140px;
     font-family: vars.$font-footer;
     color: vars.$text-color-primary;
+    background-color: var(--bg-tertiary, vars.$bg-color-tertiary);
+    padding: 0.5rem 0;
+    text-align: center;
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
 
     span {
         min-width: 140px;
@@ -20,10 +27,19 @@ p {
     }
 }
 
+footer,
+.footer {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 html[data-bs-theme="dark"] footer,
-html[data-bs-theme="dark"] p {
+html[data-bs-theme="dark"] .footer {
     background-color: vars.$bg-color-primary-dark;
     color: vars.$text-color-primary-dark;
+
+    p {
+        color: vars.$text-color-primary-dark;
+    }
 
     span {
         color: vars.$text-color-primary-dark;

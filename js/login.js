@@ -59,4 +59,23 @@ $(document).ready(function () {
   function mostrarMensajeError(texto) {
     $("#mensaje").text(texto).css("color", "red");
   }
+
+  $(document).on("click", "#togglePassword", function () {
+    const $pwd = $("#password");
+    const $icon = $(this).find("i");
+
+    if ($pwd.attr("type") === "password") {
+      $pwd.attr("type", "text");
+      if ($icon.length) {
+        $icon.removeClass("bi-eye-slash-fill").addClass("bi-eye-fill");
+      }
+      $(this).attr("aria-label", "Ocultar contraseña");
+    } else {
+      $pwd.attr("type", "password");
+      if ($icon.length) {
+        $icon.removeClass("bi-eye-fill").addClass("bi-eye-slash-fill");
+      }
+      $(this).attr("aria-label", "Mostrar contraseña");
+    }
+  });
 });
