@@ -26,14 +26,53 @@
     margin-bottom: 0.25rem;
 }
 
+
 .perfil-form input,
 .perfil-form textarea {
-    width: 130%;
+    width: 100%;
+    max-width: 100%;
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #ccc;
     margin-top: 0.25rem;
     font-size: 1rem;
+}
+
+@include bs.media-breakpoint-down(sm) {
+    .foto-img {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+@include bs.media-breakpoint-down(sm) {
+
+    .perfil-form input,
+    .perfil-form textarea,
+    .perfil-form .form-control {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+
+    .perfil-form label {
+        font-size: 0.9rem;
+    }
+
+    .perfil-guardar {
+        margin-top: 1rem;
+    }
+
+    .container-fluid span {
+        min-width: auto;
+        font-size: 0.9rem;
+    }
+}
+
+@include bs.media-breakpoint-down(md) {
+    .d-flex.flex-row.align-items-center .foto-img {
+        width: 150px;
+        height: 150px;
+    }
 }
 
 input[readonly] {

@@ -28,7 +28,7 @@ body.dark .btn-login {
 .btn-cambiar-password {
   @include btn-base;
   @include button-gradient;
-  margin: 2rem 0 0 0;
+  margin: 0;
   font-size: 1rem;
 }
 
@@ -151,4 +151,52 @@ body.dark .btn-guardar {
   display: inline-block;
   padding: 0.25rem 0.5rem;
   vertical-align: middle;
+}
+
+@include bs.media-breakpoint-down(md) {
+
+  .btn-cambiar-password,
+  .btn-guardar {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@include bs.media-breakpoint-down(sm) {
+
+  .btn-cambiar-password,
+  .btn-guardar {
+    width: 100%;
+    max-width: 240px;
+  }
+}
+
+@include bs.media-breakpoint-down(sm) {
+
+  .btn-registrar-pago,
+  .btn-registrar-horas,
+  .btn-ver-horas,
+  .btn-foto-perfil,
+  #btn-ver-todas-horas,
+  #btn-abrir-registro-horas,
+  #btn-registrar-pago,
+  .card .btn-primary {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.9rem;
+  }
+}
+
+@include bs.media-breakpoint-only(md) {
+
+  .btn-registrar-pago,
+  .btn-registrar-horas,
+  .btn-ver-horas,
+  .btn-foto-perfil,
+  #btn-ver-todas-horas,
+  #btn-abrir-registro-horas,
+  #btn-registrar-pago,
+  .card .btn-primary {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
+  }
 }

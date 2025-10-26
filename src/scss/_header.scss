@@ -2,11 +2,114 @@
 @use "mixins" as *;
 @use "bootstrap/scss/bootstrap" as bs;
 
-.img-logo {
-    max-width: 12rem;
+.site-header,
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+
+    @include bs.media-breakpoint-up(md) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1.5rem;
+    }
+
+    h1,
+    .header-title {
+        margin: 0;
+        font-family: vars.$font-title;
+        color: vars.$text-color-primary;
+        line-height: 1;
+        text-align: center;
+
+        font-size: 1.25rem;
+
+        @include bs.media-breakpoint-up(md) {
+            font-size: 1.5rem;
+        }
+
+        @include bs.media-breakpoint-up(lg) {
+            font-size: 1.75rem;
+        }
+    }
+}
+
+.img-logo,
+.site-header .img-logo {
+    width: 110px;
     height: auto;
+    display: block;
+    object-fit: contain;
+
+    @include bs.media-breakpoint-up(md) {
+        width: 140px;
+    }
+
+    @include bs.media-breakpoint-up(lg) {
+        width: 180px;
+    }
 
     @include bs.media-breakpoint-down(sm) {
-        max-width: 10rem;
+        width: 88px;
+    }
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    @include bs.media-breakpoint-down(sm) {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+html[data-bs-theme="dark"] .main-content .btn-outline-secondary.d-lg-none,
+body.dark .main-content .btn-outline-secondary.d-lg-none {
+    color: vars.$text-color-primary-dark;
+}
+
+html[data-bs-theme="dark"] .main-content .btn-outline-secondary.d-lg-none .bi,
+body.dark .main-content .btn-outline-secondary.d-lg-none .bi {
+    color: vars.$text-color-primary-dark;
+}
+
+html[data-bs-theme="dark"] .main-content .btn-outline-secondary.d-lg-none:hover,
+body.dark .main-content .btn-outline-secondary.d-lg-none:hover,
+html[data-bs-theme="dark"] .main-content .btn-outline-secondary.d-lg-none:focus,
+body.dark .main-content .btn-outline-secondary.d-lg-none:focus {
+    color: vars.$text-color-primary-dark;
+}
+
+.main-content .container-fluid>.d-flex.align-items-center.mb-3 {
+    @include bs.media-breakpoint-down(md) {
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+            margin-top: 0.5rem;
+        }
+    }
+
+    @include bs.media-breakpoint-down(sm) {
+        flex-direction: column;
+        align-items: flex-start;
+
+        h1 {
+            margin-top: 0.5rem;
+            text-align: left;
+            width: 100%;
+        }
+
+        .btn-outline-secondary.d-lg-none,
+        .btn.d-lg-none {
+            align-self: flex-start;
+            margin-right: .5rem;
+        }
     }
 }

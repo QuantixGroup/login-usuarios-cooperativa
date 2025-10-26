@@ -6,11 +6,10 @@ footer,
 .footer {
     flex-shrink: 0;
     width: 100%;
-    min-width: 140px;
     font-family: vars.$font-footer;
     color: vars.$text-color-primary;
     background-color: var(--bg-tertiary, vars.$bg-color-tertiary);
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     text-align: center;
 
     p {
@@ -19,11 +18,15 @@ footer,
     }
 
     span {
-        min-width: 140px;
+        display: inline-block;
         font-weight: 600;
         font-size: 1.1rem;
         margin: 0;
         padding: 0;
+
+        @include bs.media-breakpoint-down(sm) {
+            font-size: 1rem;
+        }
     }
 }
 

@@ -11,6 +11,7 @@
 
     @include bs.media-breakpoint-down(sm) {
         background-size: auto;
+        background-attachment: scroll;
     }
 }
 
@@ -158,5 +159,33 @@ header h1 {
 
     .modal-dialog {
         max-width: 94%;
+    }
+}
+
+@include bs.media-breakpoint-down(sm) {
+
+    #form-login .form-control,
+    #form-login label,
+    .input-group .form-control,
+    .btn-login {
+        font-size: 0.9rem;
+        padding: 0.45rem 0.6rem;
+    }
+}
+
+@include bs.media-breakpoint-down(sm) {
+
+    .modal .form-control,
+    .modal label,
+    .modal .form-select,
+    .modal .btn,
+    .modal textarea,
+    .modal .form-check-label {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .modal .modal-title {
+        font-size: 1rem;
     }
 }
