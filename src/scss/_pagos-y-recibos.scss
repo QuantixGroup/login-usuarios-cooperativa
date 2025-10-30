@@ -1,0 +1,98 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "bootstrap/scss/bootstrap" as bs;
+
+
+.app-container {
+    display: flex;
+    align-items: stretch;
+}
+
+#main-content.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.pagos-container {
+    display: block;
+    padding: 1rem 0;
+
+    @include bs.media-breakpoint-up(md) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.pagos-card {
+    width: 100%;
+    max-width: 1100px;
+    border-radius: 0.875rem;
+    padding: 0.75rem;
+}
+
+.pagos-inner {
+    background: vars.$bg-color-secondary;
+    border-radius: 0.75rem;
+    padding: 1rem;
+
+    html[data-bs-theme="dark"] & {
+        background: vars.$bg-color-primary-dark;
+    }
+
+    @include bs.media-breakpoint-down(sm) {
+        padding: 0.75rem;
+    }
+}
+
+th {
+    background-color: vars.$bg-color-primary;
+    color: vars.$text-color-secondary;
+
+    html[data-bs-theme="dark"] & {
+        background-color: vars.$bg-color-primary;
+        color: vars.$text-color-tertiary-dark;
+    }
+}
+
+td {
+    background-color: vars.$bg-color-tertiary;
+
+
+    html[data-bs-theme="dark"] & {
+        background-color: vars.$bg-color-secondary-dark;
+    }
+}
+
+#buscador-mes {
+    background-color: vars.$bg-color-form;
+    margin-bottom: 1rem;
+    max-width: 360px;
+    width: 100%;
+
+    html[data-bs-theme="dark"] & {
+        background-color: vars.$bg-color-secondary-dark;
+    }
+
+    @include bs.media-breakpoint-up(md) {
+        width: auto;
+    }
+}
+
+@include bs.media-breakpoint-down(sm) {
+
+    #buscador-mes,
+    .form-control,
+    .table .form-control {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    th,
+    td {
+        font-size: 0.9rem;
+    }
+}

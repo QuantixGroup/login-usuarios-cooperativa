@@ -1,15 +1,42 @@
-  $bg-color-primary: #1b4965;
-  $bg-color-secondary: #f6f6f6;
-  $bg-color-tertiary: #fffdf9;
-  $bg-color-form: #E8E8E8;
+$bg-color-primary: #1b4965;
+$bg-color-secondary: #f6f6f6;
+$bg-color-tertiary: #fffdf9;
+$bg-color-form: #E8E8E8;
+$bg-color-error: #ff0000;
+$bg-color-success: #008f39;
+$bg-color-default: #6c757d;
+$bg-color-danger: #dc3545;
+$bg-color-warning: #ffc107;
+$bg-color-label: #e2e8f0;
 
-  $text-color-primary: #1b4965;
-  $text-color-secondary: #f6f6f6;
 
-  $font-title: "Roboto", sans-serif;
-  $font-subtitle: "Montserrat", sans-serif;
-  $font-button: "Roboto", sans-serif;
+$text-color-primary: #1b4965;
+$text-color-secondary: #f6f6f6;
 
-  $primary: $bg-color-primary;
-  $secondary: $bg-color-secondary;
-  $tertiary: $bg-color-tertiary;
+$bg-color-button: #1b4965;
+$bg-color-button-hover: #2b78a1;
+
+$font-sidebar: "Roboto", sans-serif;
+$font-title: "Roboto", sans-serif;
+$font-subtitle: "Montserrat", sans-serif;
+$font-text: "Montserrat", sans-serif;
+$font-form: "Roboto", sans-serif;
+$font-button: "Roboto", sans-serif;
+$font-footer: "Montserrat", sans-serif;
+
+$header-height: 3.75rem;
+
+$primary: $bg-color-primary;
+$secondary: $bg-color-secondary;
+$tertiary: $bg-color-tertiary;
+
+$bg-color-primary-dark: #0f2633;
+$bg-color-secondary-dark: #0b3948;
+$bg-color-tertiary-dark: #f6f6f6;
+$bg-color-form-fourth-dark: #fffdf9;
+$bg-color-form-dark: #E8E8E8;
+$bg-color-label-dark: #e2e8f04f;
+
+$text-color-primary-dark: #f6f6f6;
+$text-color-secondary-dark: #1b4965;
+$text-color-tertiary-dark: #fffdf9;

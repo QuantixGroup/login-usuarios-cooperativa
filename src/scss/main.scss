@@ -1,8 +1,13 @@
-@import "_variables.scss";
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "_header.scss";
-@import "_body.scss";
-@import "_button.scss";
-
-
-
+@use "_dropzone.scss";
+@use "variables" as vars;
+@use "mixins" as *;
+@use "login";
+@use "sidebar";
+@use "header";
+@use "body";
+@use "buttons";
+@use "index-inicio";
+@use "perfil";
+@use "pagos-y-recibos";
+@use "footer";
+@use "bootstrap/scss/bootstrap" as bs;

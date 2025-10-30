@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-..." crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div id="sidebar" class="sidebar"></div>
+
+    <div id="main-content" class="main-content">
+        <div class="container-fluid py-4">
+            <div class="d-flex align-items-center mb-3">
+                <button class="btn btn-outline-secondary d-lg-none me-2" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" aria-label="Abrir menú">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h1 class="mb-4 mt-3 flex-fill text-center">Mi Perfil</h1>
+            </div>
+            <div class="row justify-content-center">
+                <form class="perfil-form col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-5 col-md-12">
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Nombre</span>
+                                <input type="text" class="form-control bg-body-secondary" id="nombre"
+                                    placeholder="Nombre" readonly>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Apellido</span>
+                                <input type="text" class="form-control bg-body-secondary" id="apellido"
+                                    placeholder="Apellido" readonly>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Email</span>
+                                <input type="email" class="form-control" id="email" placeholder="Email">
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Departamento</span>
+                                <input type="text" class="form-control bg-body-secondary" id="departamento"
+                                    placeholder="Departamento" readonly>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Ciudad</span>
+                                <input type="text" class="form-control bg-body-secondary" id="ciudad"
+                                    placeholder="Ciudad" readonly>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Ingresos Mensuales</span>
+                                <input type="text" class="form-control" id="ingresos" placeholder="Ingresos Mensuales">
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Comprobante de Ingresos</span>
+                                <input type="file" id="archivo" name="archivo" class="form-control">
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Estado Civil</span>
+                                <input type="text" class="form-control" id="estadoCivil" placeholder="Estado Civil">
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-12">
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Documento</span>
+                                <input type="text" class="form-control bg-body-secondary" id="documento"
+                                    placeholder="Documento" readonly>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Fecha de Nacimiento</span>
+                                <input type="date" class="form-control bg-body-secondary" id="fechaNacimiento"
+                                    placeholder="Fecha de Nacimiento" readonly>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Teléfono</span>
+                                <input type="text" class="form-control" id="telefono" placeholder="Teléfono">
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Situación Laboral</span>
+                                <input type="text" class="form-control" id="situacionLaboral"
+                                    placeholder="Situación Laboral">
+                            </div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <span class="me-2">Cantidad de Integrantes</span>
+                                <input type="text" class="form-control" id="cantidadIntegrantes"
+                                    placeholder="Cantidad de Integrantes">
+                            </div>
+                            <div class="d-flex flex-row align-items-center mt-5 justify-content-center">
+                                <img src="src/img/user-placeholder.png" alt="Foto de Perfil" class="foto-img mb-3">
+                                <button type="button"
+                                    class="btn btn-outline-secondary btn-sm btn-foto-perfil ms-3">Agregar
+                                    foto</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-2">
+                        <div class="col-md-6 text-center">
+                            <button type="submit" class="btn btn-primary btn-guardar">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="footer" class="footer"></div>
+    <form id="fotoDropzone" class="dropzone mt-2" style="display:none;" action="http://localhost:8000/api/perfil/foto"
+        enctype="multipart/form-data">
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/dropzone.js"></script>
+    <script src="js/perfil.js"></script>
+    <script src="js/env.js"></script>
+    <script src="js/cambiar-password.js"></script>
+    <script src="js/footer.js"></script>
+
+</body>
+
+</html>

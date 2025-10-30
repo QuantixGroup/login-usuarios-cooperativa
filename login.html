@@ -15,16 +15,17 @@
         <header class="d-flex flex-column align-items-center">
             <img src="src/img/logo_cooperativa.svg" alt="Logo de COVIMT 17" class="img-logo">
             <h1 class="text-center mt-4">COVIMT 17</h1>
+
         </header>
         <main class="w-100 mt-5" style="max-width: 400px;">
             <div class="card shadow">
                 <div class="card-body">
-                    <h2 class="text-center mb-4">Inicio de Sesión</h2>
                     <form id="form-login">
+                        <h2 class="card-title text-center mb-3">Inicio de Sesión</h2>
                         <div class="mb-3">
-                            <label for="documento" class="form-label">Documento (CI):</label>
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" id="documento" name="cedula"
-                                required>
+                            <label for="documento" class="form-label">Usuario (CI):</label>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" id="documento"
+                                name="cedula" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña:</label>
@@ -34,27 +35,30 @@
                                     <i class="bi bi-eye-slash-fill"></i>
                                 </span>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-login w-100 mt-3">
-                            <i class="bi bi-box-arrow-in-right me-2"></i> Ingresar
-                        </button>
-                        <div id="error" class="mt-3"></div>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="recordar" name="recordar">
-                                <label class="form-check-label" for="recordar">Recordar</label>
+                            <button type="submit" class="btn btn-login w-100 mt-3">
+                                <i class="bi bi-box-arrow-in-right me-2"></i> Ingresar
+                            </button>
+                            <div id="error" class="mt-3"></div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="recordar" name="recordar">
+                                    <label class="form-check-label" for="recordar">Recordar</label>
+                                </div>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalRecuperar">
+                                    ¿Olvidó su contraseña?
+                                </a>
                             </div>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalRecuperar">
-                                ¿Olvidó su contraseña?
-                            </a>
-                        </div>
-                        <div id="error" class="mt-3"></div>
+                            <div id="error" class="mt-3"></div>
                     </form>
+                    <div class="d-flex justify-content-center mt-3">
+                        <button class="btn-toggle" data-toggle="dark-mode" title="Cambiar tema">
+                            <i class="bi bi-sun-fill"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
-
     <div class="modal fade" id="modalRecuperar" tabindex="-1" aria-labelledby="modalRecuperarLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -69,8 +73,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" form="form-recuperar" class="btn btn-enviar">Enviar</button>
+                    <button type="button" class="btn btn-secondary btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" form="form-recuperar" class="btn btn-primary btn-enviar">Enviar</button>
                 </div>
             </div>
         </div>
@@ -80,7 +84,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/env.js"></script>
     <script src="js/login.js"></script>
-
+    <script src="js/dark-mode.js"></script>
 
 </body>
+
 </html>

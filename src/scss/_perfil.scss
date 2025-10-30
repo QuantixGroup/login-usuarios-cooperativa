@@ -1,0 +1,134 @@
+@use "variables" as vars;
+@use "mixins" as *;
+@use "bootstrap/scss/bootstrap" as bs;
+
+
+.foto-img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.perfil-guardar {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.perfil-form label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+
+.perfil-form input,
+.perfil-form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-top: 0.25rem;
+    font-size: 1rem;
+}
+
+@include bs.media-breakpoint-down(sm) {
+    .foto-img {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+@include bs.media-breakpoint-down(sm) {
+
+    .perfil-form input,
+    .perfil-form textarea,
+    .perfil-form .form-control {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+
+    .perfil-form label {
+        font-size: 0.9rem;
+    }
+
+    .perfil-guardar {
+        margin-top: 1rem;
+    }
+
+    .container-fluid span {
+        min-width: auto;
+        font-size: 0.9rem;
+    }
+}
+
+@include bs.media-breakpoint-down(md) {
+    .d-flex.flex-row.align-items-center .foto-img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+input[readonly] {
+    background-color: vars.$bg-color-secondary;
+    cursor: not-allowed;
+}
+
+.container-fluid span {
+    min-width: 140px;
+    display: block;
+    font-family: vars.$font-form;
+    font-weight: bold;
+}
+
+.alert-exito,
+.alert-error {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+    max-width: 380px;
+    width: fit-content;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 1;
+
+    &.alert-exito {
+        background-color: vars.$bg-color-success;
+    }
+
+    &.alert-error {
+        background-color: vars.$bg-color-error;
+    }
+}
+
+.alert-exito.fade-out,
+.alert-error.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+.icon {
+    background: vars.$bg-color-secondary;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.alert-exito-text,
+.alert-error-text {
+    font-family: vars.$font-text;
+    color: vars.$text-color-secondary;
+}

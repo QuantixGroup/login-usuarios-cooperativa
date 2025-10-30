@@ -8,21 +8,30 @@ $(document).ready(function () {
     $.ajax({
       url: API_USUARIOS + "/iniciar-sesion",
       method: "POST",
-      headers: { "Accept": "application/json" },
+      headers: { Accept: "application/json" },
       contentType: "application/json",
       data: JSON.stringify({ cedula, contrasena }),
       success: function (datos) {
         const token = datos.access_token;
-        if (!token) { mostrarMensajeError("No llegó access_token"); return; }
+        if (!token) {
+          return;
+        }
 
         sessionStorage.setItem("tokenAcceso", token);
-        window.location.href = "index.html";  
+
+        if (datos.primer_inicio === true || datos.primer_inicio === 1) {
+          sessionStorage.setItem("primerInicio", "true");
+          window.location.href = "cambiar-password.html";
+        } else {
+          window.location.href = "index.html";
+        }
+
         mostrarMensajeOk("Sesión iniciada");
       },
       error: function (xhr) {
         const respuesta = xhr.responseJSON || {};
         mostrarMensajeError(respuesta.error || "No fue posible iniciar sesión");
-      }
+      },
     });
   });
 
@@ -40,11 +49,33 @@ $(document).ready(function () {
       },
       error: function () {
         mostrarMensajeError("No se pudo cargar el perfil");
-      }
+      },
     });
   }
 
-  function mostrarMensajeOk(texto) { $("#mensaje").text(texto).css("color", "green"); }
-  function mostrarMensajeError(texto) { $("#mensaje").text(texto).css("color", "red"); }
+  function mostrarMensajeOk(texto) {
+    $("#mensaje").text(texto).css("color", "green");
+  }
+  function mostrarMensajeError(texto) {
+    $("#mensaje").text(texto).css("color", "red");
+  }
 
+  $(document).on("click", "#togglePassword", function () {
+    const $pwd = $("#password");
+    const $icon = $(this).find("i");
+
+    if ($pwd.attr("type") === "password") {
+      $pwd.attr("type", "text");
+      if ($icon.length) {
+        $icon.removeClass("bi-eye-slash-fill").addClass("bi-eye-fill");
+      }
+      $(this).attr("aria-label", "Ocultar contraseña");
+    } else {
+      $pwd.attr("type", "password");
+      if ($icon.length) {
+        $icon.removeClass("bi-eye-fill").addClass("bi-eye-slash-fill");
+      }
+      $(this).attr("aria-label", "Mostrar contraseña");
+    }
+  });
 });
