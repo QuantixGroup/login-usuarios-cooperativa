@@ -1,9 +1,16 @@
 $(document).ready(function () {
+  const cedulaRecordada = localStorage.getItem("cedula_recordada");
+  if (cedulaRecordada) {
+    $("#documento").val(cedulaRecordada);
+    $("#recordar").prop("checked", true);
+  }
+
   $("#form-login").on("submit", function (evento) {
     evento.preventDefault();
 
     const cedula = $("#documento").val().trim();
     const contrasena = $("#password").val();
+    const recordar = $("#recordar").is(":checked");
 
     $.ajax({
       url: API_USUARIOS + "/iniciar-sesion",
@@ -18,6 +25,11 @@ $(document).ready(function () {
         }
 
         sessionStorage.setItem("tokenAcceso", token);
+        if (recordar) {
+          localStorage.setItem("cedula_recordada", cedula);
+        } else {
+          localStorage.removeItem("cedula_recordada");
+        }
 
         if (datos.primer_inicio === true || datos.primer_inicio === 1) {
           sessionStorage.setItem("primerInicio", "true");
@@ -25,12 +37,19 @@ $(document).ready(function () {
         } else {
           window.location.href = "index.html";
         }
-
-        mostrarMensajeOk("Sesión iniciada");
       },
       error: function (xhr) {
         const respuesta = xhr.responseJSON || {};
-        mostrarMensajeError(respuesta.error || "No fue posible iniciar sesión");
+        let mensajeError = "No fue posible iniciar sesión";
+        if (xhr.status === 401 || xhr.status === 400) {
+          mensajeError = "Contraseña incorrecta";
+        } else if (xhr.status === 403) {
+          mensajeError = "Usuario no aprobado o sin acceso";
+        } else if (respuesta.error) {
+          mensajeError = respuesta.error;
+        }
+
+        mostrarMensajeError(mensajeError);
       },
     });
   });
@@ -54,10 +73,14 @@ $(document).ready(function () {
   }
 
   function mostrarMensajeOk(texto) {
-    $("#mensaje").text(texto).css("color", "green");
+    $("#error").html(
+      `<div class="alert alert-success" role="alert">${texto}</div>`
+    );
   }
   function mostrarMensajeError(texto) {
-    $("#mensaje").text(texto).css("color", "red");
+    $("#error").html(
+      `<div class="alert alert-danger" role="alert">${texto}</div>`
+    );
   }
 
   $(document).on("click", "#togglePassword", function () {
