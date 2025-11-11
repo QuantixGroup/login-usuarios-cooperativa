@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: proyecto/login-usuarios-cooperativa:dev
+    container_name: login_page
+    ports:
+      - "3001:80"
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
